@@ -1,0 +1,7 @@
+.secondaryColor{
+    color: var(--secondaryColor);   
+}
+
+input{
+    cursor: pointer;
+}

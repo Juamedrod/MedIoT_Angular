@@ -1,0 +1,29 @@
+.error{
+    color: tomato;
+}
+
+.subtext{
+    color:var(--secondaryColor)
+}
+
+.ng-touched.ng-invalid:not(form){
+    border: 2px solid tomato;
+}
+
+.ng-touched.ng-valid:not(form){
+    border: 2px solid lightgreen;
+}
+
+form{
+    background-image: url('/assets/images/leathered_blue_full.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgb(17, 11, 112);
+    background-blend-mode: multiply;
+    border-radius: 10px;    
+    box-shadow: 1px 1px 3px lightgrey;
+}
+
+label{
+    color:var(--mainColor)
+}
