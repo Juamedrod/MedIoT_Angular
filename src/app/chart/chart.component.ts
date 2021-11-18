@@ -9,6 +9,7 @@ import Chart from 'chart.js/auto';
 export class ChartComponent implements OnInit, AfterViewInit {
   @ViewChild('myChart') myChart!: ElementRef;
   chart: any;
+  interval: any;
 
   constructor() {
   }
@@ -23,7 +24,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
           label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          data: [4, 19, 9, 5, 8, 2],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -51,7 +52,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
         }
       }
     });
+
+    this.interval = setInterval(() => {
+      this.chart.data.datasets[0].data = [Math.random() * 19, Math.random() * 19, Math.random() * 19, Math.random() * 19, Math.random() * 19, Math.random() * 19];
+      this.chart.update();
+    }, 3000);
   }
-
-
 }
