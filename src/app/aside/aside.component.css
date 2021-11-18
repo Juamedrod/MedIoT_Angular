@@ -1,0 +1,31 @@
+.wrapper{
+    /* background-color: var(--secondaryColor); */
+    background: linear-gradient(0deg,#389466,#42b883);;
+    border-radius: 10px;
+    margin-top: 20px;
+    height: 75vh;
+}
+
+.wrapper>div{
+    border-bottom: 1px solid lightgrey;
+}
+
+a{
+    font-size: 100%;
+    font-family: var(--ternaryFont);
+    font-weight: 300;
+    text-decoration: none;
+    color: white;
+}
+
+i{
+    cursor: pointer;
+    font-size:150%;
+    padding: 5px 0;
+    transition: 2s;
+}
+
+i:hover, a:hover{
+    color: var(--optionColor1);
+    transition: 0.5s;
+}

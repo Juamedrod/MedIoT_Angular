@@ -1,7 +1,35 @@
 .secondaryColor{
-    color: var(--secondaryColor);   
+    color: var(--optionColor2);   
 }
 
 input{
     cursor: pointer;
+}
+
+.container-fluid{
+    background-color: var(--mainColor);
+    min-height: 35px;
+}
+
+p{
+    font-size: 80%;
+}
+
+a{
+    color: rgba(255, 255 , 255, 0.4);
+    
+    font-size: 80%;
+    font-family: var(--ternaryFont);   
+    font-weight: 100; 
+}
+
+a.secondaryColor:last-child{
+    font-size: 100%;
+    color: var(--optionColor1);
+    text-shadow: 1px 1px 1px var(--optionColor2);
+}
+
+a:hover{
+    color: var(--optionColor2);
+    transition: 0.5s;
 }

@@ -8,6 +8,12 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { HeaderComponent } from './header/header.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BlackboardComponent } from './blackboard/blackboard.component';
+import { AsideComponent } from './aside/aside.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +21,13 @@ import { AboutUsComponent } from './about-us/about-us.component';
     RegisterComponent,
     LoginComponent,
     FooterComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    HeaderComponent,
+    DashboardComponent,
+    BlackboardComponent,
+    AsideComponent,
+    ProfileComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,

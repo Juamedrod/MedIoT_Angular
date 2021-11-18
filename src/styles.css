@@ -1,22 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import url(https://fonts.googleapis.com/css?family=Montserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 @import url(https://fonts.googleapis.com/css?family=MuseoModerno:100,200,300,regular,500,600,700,800,900);
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
 @import url(https://fonts.googleapis.com/css?family=Fredoka+One:regular);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css);
 
 :root{
     --mainColor: #1E1E2B;
-    --secondaryColor: rgb(35, 150, 127);
+    --secondaryColor: #42b883;
     --ternaryColor: #432534;
-    --optionColor1:#925E78;
-    --optionColor2:#28536B;
+    --optionColor1:#e93890;
+    --optionColor2:#1d8cf8;
     --optionalColor3: #FF773D;
+    --optionalColor4:#2b2e49;
+    --mainFont: Fredoka One;
+    --secondaryFont: 'Roboto', cursive;
+    --ternaryFont: MuseoModerno;
 }
 
-
-body{
-    font-family:'Fredoka One', cursive;;
+body,nav{
+    font-family:var(--secondaryFont);
+    font-weight: 700;
     background-color: var(--mainColor) ;
     color: white;
-    text-shadow: 1px 1px 1px black,0px 0px 20px var(--mainColor);
-  
+    text-shadow: 1px 1px 1px black,0px 0px 20px var(--mainColor);  
+}
+
+h1,h2{
+    font-family: Fredoka One;
 }

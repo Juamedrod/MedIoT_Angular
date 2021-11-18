@@ -1,0 +1,25 @@
+.container-fluid{
+    background-color: var(--mainColor);    
+}
+
+i{
+    cursor: pointer;
+    font-size: 140%;
+    color: var(--secondaryColor);
+}
+
+a{
+    color: var(--secondaryColor);
+    font-family: var(--mainFont);
+    font-weight: 400;
+    transition: 2s;
+}
+
+i:hover, a:hover{
+    color: var(--optionColor1);
+    transition: 0.5s;
+    text-shadow: 1px 1px 1px var(--secondaryColor);
+    transform: scale(1.1);
+    
+}
+

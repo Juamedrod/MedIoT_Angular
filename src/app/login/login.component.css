@@ -18,7 +18,7 @@ form{
     background-image: url('/assets/images/leathered_blue_full.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: rgb(17, 11, 112);
+    background-color: rgb(93, 86, 199);
     background-blend-mode: multiply;
     border-radius: 10px;    
     box-shadow: 1px 1px 3px lightgrey;
@@ -26,4 +26,8 @@ form{
 
 label{
     color:var(--mainColor)
+}
+
+small{
+    text-shadow: 1px 1px 1px lightgrey;
 }

@@ -1,7 +1,7 @@
 .wrapper{
     background-image: url('/assets/images/leathered_blue_full.png');
     background-size: cover;
-    background-color: rgb(17, 11, 112);
+    background-color: rgb(122, 116, 212);;
     background-blend-mode: multiply;
     border-radius: 10px;    
     box-shadow: 1px 1px 3px lightgrey;
@@ -29,4 +29,19 @@ input{
 
 input{
     cursor: pointer;
+}
+
+h2{
+    color: var(--secondaryColor);
+}
+
+label{
+    color: var(--secondaryColor);
+    text-shadow: 1px 1px 1px white;
+    font-family: var(--ternaryFont);
+    font-weight: 400;
+}
+
+label:last-child{
+    color: lightgrey;
 }
