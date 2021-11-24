@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import Chart from 'chart.js/auto';
+import { ChartService } from '../Services/chart.service';
 
 @Component({
   selector: 'chart',
@@ -11,51 +11,26 @@ export class ChartComponent implements OnInit, AfterViewInit {
   chart: any;
   interval: any;
 
-  constructor() {
+  constructor(private chartService: ChartService) {
   }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit() {
-    this.chart = new Chart(this.myChart.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [4, 19, 9, 5, 8, 2],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
+    /*  this.chart = this.chartService.lineChart(this.myChart, {
+       variableName: 'temp', color: 'rgb(255, 0, 0)', backgroundColorRGBA: 'rgba(255, 0, 0, 0.1)',
+       fillArea: true, tension: 0.4, chartName: 'Mi variable'
+     }) */
+
+    this.chart = this.chartService.barChart(this.myChart, {
+      variableName: 'ematopeya',
+      color: 'rbg(255,0,0)', backgroundColorRGBA: 'rgba(255,0,0,0.6)',
+      borderWidth: 2
     });
 
-    this.interval = setInterval(() => {
-      this.chart.data.datasets[0].data = [Math.random() * 19, Math.random() * 19, Math.random() * 19, Math.random() * 19, Math.random() * 19, Math.random() * 19];
-      this.chart.update();
-    }, 3000);
+    setInterval(() => {
+      this.chartService.addData(this.chart, 12, Math.trunc(Math.random() * 90));
+    }, 1000);
   }
 }
