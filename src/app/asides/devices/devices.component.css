@@ -1,0 +1,44 @@
+.wrapper{   
+    background-color: rgba(122, 116, 212, 0.253);    
+    border-radius: 10px;    
+    box-shadow: 1px 1px 3px lightgrey;
+}
+
+.ng-touched.ng-invalid:not(form){
+    border: 2px solid tomato;
+}
+
+.ng-touched.ng-valid:not(form){
+    border: 2px solid lightgreen;
+}
+
+.error{
+    color: tomato;
+}
+
+input{
+    border: 2px solid transparent;
+}
+
+.btnform{
+    border: 1px solid white;
+}
+
+input{
+    cursor: pointer;
+}
+
+h2{
+    color: var(--secondaryColor);
+}
+
+label{
+    color: var(--secondaryColor);
+    text-shadow: 1px 1px 1px white;
+    font-family: var(--ternaryFont);
+    font-weight: 400;
+}
+
+label:last-child{
+    color: lightgrey;
+}

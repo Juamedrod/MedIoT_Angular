@@ -18,13 +18,12 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutUsComponent },
   {
     path: 'dashboard', component: DashboardComponent, children: [
-      { path: '', pathMatch: 'full', component: BlackboardComponent },
+      { path: '', pathMatch: 'full', component: DevicesComponent },
       { path: 'blackboard', component: BlackboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'realtime', component: RealtimeComponent },
       { path: 'devices', component: DevicesComponent },
       { path: 'history', component: HistoryComponent },
-
     ]
   },
   { path: '**', redirectTo: '/register' }

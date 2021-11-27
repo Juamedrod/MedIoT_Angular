@@ -1,1 +1,72 @@
-<p>devices works!</p>
+<div class="container">
+    <div class="row text-center p-2">
+        <div class="col.12 col-lg-6 offset-lg-3 p-3 wrapper text-center">
+            <h2 class="mt-2">REGISTER</h2>
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()" novalidate>
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" formControlName="nombre">
+                    <p class="error" *ngIf="checkError('nombre', 'required',true)">
+                        El campo es requerido
+                    </p>
+                    <p class="error" *ngIf="checkError('nombre', 'minlength',true)">
+                        El campo necesita una longitud minima de 4 caracteres
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" formControlName="apellidos">
+                    <p class="error" *ngIf="checkError('apellidos', 'required',true)">
+                        El campo es requerido
+                    </p>
+                    <p class="error" *ngIf="checkError('apellidos', 'minlength',true)">
+                        El campo necesita una longitud minima de 4 caracteres
+                    </p>
+                    <p class="error" *ngIf="checkError('apellidos', 'maxlength',true)">
+                        El campo necesita una longitud maxima de
+                        {{formulario.get('apellidos')!.errors!.maxlength.requiredLength}}
+                        caracteres
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" formControlName="email">
+                    <p class="error" *ngIf="checkError('email', 'required',true)">
+                        El campo es requerido.
+                    </p>
+                    <p class="error" *ngIf="checkError('email', 'pattern',false)">
+                        El campo email debe ser un email correcto.
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Dni</label>
+                    <input type="text" class="form-control" formControlName="dni">
+                    <p class="error" *ngIf="checkError('dni', 'dnivalidator',true)">
+                        DNI incorrecto.
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" formControlName="password" autocomplete="new-password">
+                    <p class="error" *ngIf="checkError('password', 'required',true)">
+                        El campo es requerido
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Repite Password</label>
+                    <input type="password" class="form-control" formControlName="repite_password"
+                        autocomplete="new-password">
+                    <p class="error" *ngIf="checkError('repite_password', 'required',true)">
+                        El campo es requerido
+                    </p>
+                    <p class="error" *ngIf="formulario.hasError('passwordvalidator')">
+                        Debes escribir la misma contraseña en los dos campos.
+                    </p>
+                </div>
+                <input type="submit" value="ENVIAR" class="btn w-50 mt-2 btnform"
+                    [ngClass]="{'btn-danger': formulario.invalid, 'btn-success':formulario.valid}"
+                    [disabled]="!formulario.valid">
+            </form>
+        </div>
+    </div>
+</div>
