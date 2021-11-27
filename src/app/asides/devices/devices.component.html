@@ -1,66 +1,53 @@
-<div class="container">
+<div class="container pb-2">
     <div class="row text-center p-2">
-        <div class="col.12 col-lg-6 offset-lg-3 p-3 wrapper text-center">
-            <h2 class="mt-2">REGISTER</h2>
+        <div class="col.12 p-3 wrapper text-center">
+            <h2 class="mt-2">REGISTER DEVICE</h2>
             <form [formGroup]="formulario" (ngSubmit)="onSubmit()" novalidate>
                 <div class="mb-3">
-                    <label class="form-label">Nombre</label>
-                    <input type="text" class="form-control" formControlName="nombre">
-                    <p class="error" *ngIf="checkError('nombre', 'required',true)">
-                        El campo es requerido
-                    </p>
-                    <p class="error" *ngIf="checkError('nombre', 'minlength',true)">
-                        El campo necesita una longitud minima de 4 caracteres
-                    </p>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Apellidos</label>
-                    <input type="text" class="form-control" formControlName="apellidos">
-                    <p class="error" *ngIf="checkError('apellidos', 'required',true)">
-                        El campo es requerido
-                    </p>
-                    <p class="error" *ngIf="checkError('apellidos', 'minlength',true)">
-                        El campo necesita una longitud minima de 4 caracteres
-                    </p>
-                    <p class="error" *ngIf="checkError('apellidos', 'maxlength',true)">
-                        El campo necesita una longitud maxima de
-                        {{formulario.get('apellidos')!.errors!.maxlength.requiredLength}}
-                        caracteres
-                    </p>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" formControlName="email">
-                    <p class="error" *ngIf="checkError('email', 'required',true)">
-                        El campo es requerido.
-                    </p>
-                    <p class="error" *ngIf="checkError('email', 'pattern',false)">
-                        El campo email debe ser un email correcto.
-                    </p>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Dni</label>
-                    <input type="text" class="form-control" formControlName="dni">
-                    <p class="error" *ngIf="checkError('dni', 'dnivalidator',true)">
-                        DNI incorrecto.
-                    </p>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control" formControlName="password" autocomplete="new-password">
-                    <p class="error" *ngIf="checkError('password', 'required',true)">
+                    <label class="form-label">Device Type</label>
+                    <select class="form-select form-select-lg mb-3" formControlName="device"
+                        aria-label=".form-select-lg ">
+                        <option value=''>Select your device</option>
+                        <option value="esp32">ESP32-DevKit1</option>
+                        <option value="arduino">Arduino Uno</option>
+                        <option value="raspberry">Raspberry Pi</option>
+                    </select>
+                    <p class="error" *ngIf="checkError('device', 'required',true)">
                         El campo es requerido
                     </p>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Repite Password</label>
-                    <input type="password" class="form-control" formControlName="repite_password"
-                        autocomplete="new-password">
-                    <p class="error" *ngIf="checkError('repite_password', 'required',true)">
+                    <label class="form-label">Device Nickname</label>
+                    <input type="text" class="form-control" formControlName="deviceName">
+                    <p class="error" *ngIf="checkError('deviceName', 'required',true)">
                         El campo es requerido
                     </p>
-                    <p class="error" *ngIf="formulario.hasError('passwordvalidator')">
-                        Debes escribir la misma contraseña en los dos campos.
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Device private Id</label>
+                    <input type="text" class="form-control" formControlName="dId">
+                    <p class="error" *ngIf="checkError('dId', 'required',true)">
+                        El campo es requerido
+                    </p>
+                    <div class="py-2 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-primary" (click)="validateId()">Validate ID</button>
+                        <p class="m-0 ps-2" [ngClass]="{'success': idAvaliable, 'error': !idAvaliable}"
+                            *ngIf="this.formulario.get('dId')?.touched"> {{idAvaliable?
+                            'Success!': 'ID is not avaliable'}}</p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <p class="d-flex justify-content-center align-items-center ">
+                        Add Variable for this device<i class="far fa-plus-square ps-2 fs-1 cursored"
+                            (click)="addVariableToForm()"></i></p>
+                </div>
+                <div class="mb-3" *ngFor="let variable of variables let index=index">
+                    <label class="form-label">Variable name unique ID. Use a descriptive name e.x:
+                        'temp_room', 'humidity'...
+                        <i class="fas fa-times ps-3 text-danger cursored" (click)="delete(index)"></i></label>
+                    <input type="text" class="form-control" [formControlName]="variable">
+                    <p class="error" *ngIf="checkError(variable, 'required',true)">
+                        El campo es requerido
                     </p>
                 </div>
                 <input type="submit" value="ENVIAR" class="btn w-50 mt-2 btnform"

@@ -8,16 +8,16 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 })
 export class DevicesComponent implements OnInit {
   formulario: FormGroup;
+  variables: string[];
+  idAvaliable: boolean;
 
   constructor() {
+    this.idAvaliable = false;
+    this.variables = [];
     this.formulario = new FormGroup({
-      nombre: new FormControl('', [Validators.required]),
-      apellidos: new FormControl('', [Validators.required]),
-      email: new FormControl(''),
-      dni: new FormControl(''),
-      password: new FormControl('', [Validators.required]),
-      repite_password: new FormControl('', [Validators.required]),
-      agreements: new FormControl(false, [Validators.required])
+      device: new FormControl('', [Validators.required]),
+      deviceName: new FormControl('', [Validators.required]),
+      dId: new FormControl('', [Validators.required])
     });
   }
 
@@ -32,6 +32,19 @@ export class DevicesComponent implements OnInit {
 
   checkError(controlName: string, error: string, touched: boolean): boolean | undefined {
     return touched ? this.formulario.get(controlName)?.hasError(error) && this.formulario.get(controlName)?.touched : this.formulario.get(controlName)?.hasError(error);
+  }
+
+  addVariableToForm() {
+    this.formulario.addControl(`variable${this.variables.length + 1}`, new FormControl('', [Validators.required]));
+    this.variables.push(`variable${this.variables.length + 1}`);
+  }
+
+  delete(index: number) {
+    this.variables.splice(index, 1);
+  }
+
+  validateId() {
+    this.idAvaliable = true;//Este metodo mira en la BD si el id unico ya está ocupado.
   }
 
   //VALIDADORES
