@@ -14,6 +14,7 @@ import { BlackboardComponent } from './blackboard/blackboard.component';
 import { AsideComponent } from './aside/aside.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChartComponent } from './chart/chart.component';
+import { SwitchComponent } from './switch/switch.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ChartComponent } from './chart/chart.component';
     BlackboardComponent,
     AsideComponent,
     ProfileComponent,
-    ChartComponent
+    ChartComponent,
+    SwitchComponent
   ],
   imports: [
     BrowserModule,

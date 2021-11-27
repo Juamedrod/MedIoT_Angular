@@ -97,10 +97,9 @@ export class ChartService {
   }
 
   removeData(chart: Chart) {
-    chart.data.labels!.pop();
+    chart.data.labels!.shift();
     chart.data.datasets.forEach((dataset) => {
-      dataset.data.pop();
+      dataset.data.shift();
     });
-    chart.update();
   }
 }
