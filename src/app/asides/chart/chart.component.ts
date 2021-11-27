@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { DisplayConfig, displayType } from '../Interfaces/DisplayConfig.interface';
-import { ChartService } from '../Services/chart.service';
+import { DisplayConfig, displayType } from '../../Interfaces/DisplayConfig.interface';
+import { ChartService } from '../../Services/chart.service';
 
 @Component({
   selector: 'chart',

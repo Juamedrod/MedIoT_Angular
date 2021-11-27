@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,11 +10,15 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { BlackboardComponent } from './blackboard/blackboard.component';
+import { BlackboardComponent } from './asides/blackboard/blackboard.component';
 import { AsideComponent } from './aside/aside.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ChartComponent } from './chart/chart.component';
-import { SwitchComponent } from './switch/switch.component';
+import { ProfileComponent } from './asides/profile/profile.component';
+import { ChartComponent } from './asides/chart/chart.component';
+import { SwitchComponent } from './asides/switch/switch.component';
+import { BooleanDisplayComponent } from './asides/boolean-display/boolean-display.component';
+import { RealtimeComponent } from './asides/realtime/realtime.component';
+import { HistoryComponent } from './asides/history/history.component';
+import { DevicesComponent } from './asides/devices/devices.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +33,17 @@ import { SwitchComponent } from './switch/switch.component';
     AsideComponent,
     ProfileComponent,
     ChartComponent,
-    SwitchComponent
+    SwitchComponent,
+    BooleanDisplayComponent,
+    RealtimeComponent,
+    HistoryComponent,
+    DevicesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

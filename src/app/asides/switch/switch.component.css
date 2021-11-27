@@ -1,0 +1,20 @@
+div{
+    font-family: var(--ternaryFont);
+    font-weight: 300;
+}
+
+
+input{
+    cursor: pointer;
+    min-height:30px;
+    color: white;
+    border-color: var(--mainColor);
+    background-color: var(--optionColor1);
+    
+}
+
+
+.form-switch .form-check-input:checked {
+    background-color: var(--secondaryColor) !important;
+    color: var(--secondaryColor);
+}

@@ -1,0 +1,8 @@
+.wrapper>div:last-child{
+    margin-bottom: 70px;
+    padding: 10px;
+}
+
+.border{
+    border: 1px solid white;
+}

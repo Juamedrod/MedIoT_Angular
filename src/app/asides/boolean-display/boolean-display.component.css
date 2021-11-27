@@ -1,0 +1,16 @@
+div{
+    font-family: var(--ternaryFont);
+    font-weight: 300;
+}
+
+.row.text-center{
+    min-height:30px;
+}
+
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}
