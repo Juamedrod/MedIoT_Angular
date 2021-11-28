@@ -4,10 +4,9 @@
             <h2 class="mt-2">ADD DEVICE</h2>
             <form [formGroup]="formulario" novalidate>
                 <div class="mb-3">
-                    <label class="form-label">Device Type</label>
                     <select class="form-select form-select-lg mb-3" formControlName="deviceType"
                         aria-label=".form-select-lg ">
-                        <option value=''>Select your device</option>
+                        <option class="text-dark" value=''>Select your device</option>
                         <option value="esp32">ESP32-DevKit1</option>
                         <option value="arduino">Arduino Uno</option>
                         <option value="raspberry">Raspberry Pi</option>
@@ -16,21 +15,30 @@
                         El campo es requerido
                     </p>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Device Nickname</label>
-                    <input type="text" class="form-control" formControlName="nickname">
+                <div class=" form-floating mb-3">
+                    <input type="text" class="form-control text-dark" id="floatingInput" formControlName="nickname">
+                    <label for="floatingInput">Device Name</label>
                     <p class="error" *ngIf="checkError('nickname', 'required',true)">
                         El campo es requerido
                     </p>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Device private Id</label>
-                    <input type="text" class="form-control" formControlName="dId">
+                <div class=" form-floating mb-3">
+                    <input type="text" class="form-control text-dark" id="floatingInputDescription"
+                        formControlName="description">
+                    <label for="floatingInputDescription">Device description</label>
+                    <p class="error" *ngIf="checkError('description', 'required',true)">
+                        El campo es requerido
+                    </p>
+                </div>
+                <div class=" form-floating mb-3">
+                    <input type="text" class="form-control text-dark" id="floatingInputDid" formControlName="dId">
+                    <label for="floatingInputDid">Device Unique ID</label>
                     <p class="error" *ngIf="checkError('dId', 'required',true)">
                         El campo es requerido
                     </p>
                     <div class="py-2 d-flex justify-content-center align-items-center">
-                        <button class="btn btn-primary" (click)="validateId($event)"
+                        <button class="btn border-white" (click)="validateId($event)"
+                            [ngClass]="{'btn-success': idAvaliable, 'btn-danger': !idAvaliable}"
                             [disabled]="this.formulario.get('dId')?.pristine">Validate ID</button>
                         <p class="m-0 ps-2" [ngClass]="{'success': idAvaliable, 'error': !idAvaliable}"
                             *ngIf="this.formulario.get('dId')?.touched && clicked"> {{idAvaliable?
@@ -38,79 +46,44 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <p class="d-flex justify-content-center align-items-center ">
-                        Add Variable for this device<i class="far fa-plus-square ps-2 fs-1 cursored"
-                            (click)="addVariableToForm()"></i></p>
+                    <p class="d-inline-flex justify-content-center align-items-center cursored hoverablep"
+                        (click)="addVariableToForm()">
+                        <i class="fas fa-plus-square ps-2 fs-1 cursored pe-2"></i>
+                        Add Variable for this device
+                        <i class="fas fa-plus-square ps-2 pe-2 fs-1 cursored"></i>
+                    </p>
                 </div>
                 <div class="mb-3" *ngFor="let variable of variables let index=index">
-                    <label class="form-label">Variable name unique ID. Use a descriptive name e.x:
+                    <label class="form-label labelvariable">Variable name unique ID. Use a descriptive name e.x:
                         'temp_room', 'humidity'...
-                        <i class="fas fa-times ps-3 text-danger cursored" (click)="delete(index)"></i></label>
+                        <i class="fas fa-times ps-3 text-danger cursored"
+                            (click)="deleteVariableFromForm(index)"></i></label>
                     <input type="text" class="form-control" [formControlName]="variable">
                     <p class="error" *ngIf="checkError(variable, 'required',true)">
                         El campo es requerido
                     </p>
                 </div>
-                <button (click)="onSubmit()" class="btn w-25 mt-2 btnform"
-                    [ngClass]="{'btn-danger': formulario.invalid, 'btn-success':formulario.valid}"
+                <button (click)="onSubmit()" class="btn w-25 mt-2 btnform "
+                    [ngClass]="{'btn-danger': formulario.invalid,'bg-opacity-50':formulario.invalid ,'btn-success':formulario.valid, 'bg-opacity-100':formulario.valid}"
                     [disabled]="!formulario.valid">SAVE </button>
             </form>
         </div>
     </div>
-    <div class="row py-5">
-        <div class="col-12 col-lg-4">
+    <h2 class="text-center mt-5">Active Devices</h2>
+    <div class="row pt-3 pb-5">
+        <div class="col-12 col-lg-4 " *ngFor="let device of devices">
             <div class="p-2">
-                <div class="card bg-transparent border-white p-lg-1">
-                    <h5 class="card-title text-center">ESP-32</h5>
-                    <div class="imgportrait" [ngStyle]="{'backgroundImage': 'url(/assets/images/esp32.png)'}"></div>
+                <div class="card bg-transparent border-success p-lg-1 device">
+                    <h5 class="card-title text-center">{{device.deviceType}}</h5>
+                    <div class="imgportrait"
+                        [ngStyle]="{'backgroundImage': 'url(/assets/images/'+device.deviceType+'.png)'}"></div>
                     <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's content.</p>
+                        <p class="card-text">{{device.description}}</p>
                     </div>
                     <p class="text-center">Variables</p>
                     <ul class="list-group-flush bg-transparent list-group-numbered text-white">
-                        <li class="list-group-item bg-transparent text-white-50">An item</li>
-                        <li class="list-group-item bg-transparent text-white-50">A second item</li>
-                        <li class="list-group-item bg-transparent text-white-50">A third item</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4">
-            <div class="p-2">
-                <div class="card bg-transparent border-white p-lg-1">
-                    <h5 class="card-title text-center">ESP-32</h5>
-                    <div class="imgportrait" [ngStyle]="{'backgroundImage': 'url(/assets/images/raspberry.png)'}"></div>
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's content.</p>
-                    </div>
-                    <p class="text-center">Variables</p>
-                    <ul class="list-group-flush bg-transparent list-group-numbered text-white">
-                        <li class="list-group-item bg-transparent text-white-50">An item</li>
-                        <li class="list-group-item bg-transparent text-white-50">A second item</li>
-                        <li class="list-group-item bg-transparent text-white-50">A third item</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4">
-            <div class="p-2">
-                <div class="card bg-transparent border-white p-lg-1">
-                    <h5 class="card-title text-center">ESP-32</h5>
-                    <div class="imgportrait" [ngStyle]="{'backgroundImage': 'url(/assets/images/arduino.png)'}"></div>
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's content.</p>
-                    </div>
-                    <p class="text-center">Variables</p>
-                    <ul class="list-group-flush bg-transparent list-group-numbered text-white">
-                        <li class="list-group-item bg-transparent text-white-50">An item</li>
-                        <li class="list-group-item bg-transparent text-white-50">A second item</li>
-                        <li class="list-group-item bg-transparent text-white-50">A third item</li>
+                        <li class="list-group-item bg-transparent text-white-50"
+                            *ngFor="let variable of device.variables">{{variable}}</li>
                     </ul>
                 </div>
             </div>

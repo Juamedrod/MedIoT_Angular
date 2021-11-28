@@ -18,21 +18,24 @@ export class DevicesComponent implements OnInit {
     this.clicked = false;
     this.idAvaliable = false;
     this.variables = [];
-    this.devices = this.devicesService.getAll();
+    this.devices = [];
     this.formulario = new FormGroup({
       deviceType: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
       nickname: new FormControl('', [Validators.required]),
       dId: new FormControl('', [Validators.required])
     });
   }
 
   ngOnInit(): void {
+    this.devices = this.devicesService.getAll();
   }
 
   onSubmit() {
-    if (this.formulario.invalid) return;
+    if (this.formulario.invalid || !this.idAvaliable) return;
     const device: Device = {
       deviceType: this.formulario.get('deviceType')?.value,
+      description: this.formulario.get('description')?.value,
       dId: this.formulario.get('dId')?.value,
       nickname: this.formulario.get('nickname')?.value,
       variables: this.variables
@@ -51,7 +54,8 @@ export class DevicesComponent implements OnInit {
     this.variables.push(`variable${this.variables.length + 1}`);
   }
 
-  delete(index: number) {
+  deleteVariableFromForm(index: number) {
+    this.formulario.removeControl(`variable${index + 1}`);
     this.variables.splice(index, 1);
   }
 
@@ -61,5 +65,5 @@ export class DevicesComponent implements OnInit {
     this.idAvaliable = true;//Este metodo mira en la BD si el id unico ya está ocupado.
   }
 
-  //VALIDADORES
+  //CUSTOM VALIDATORS
 }

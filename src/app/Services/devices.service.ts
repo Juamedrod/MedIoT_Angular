@@ -12,6 +12,7 @@ export class DevicesService {
     this.devices = [{
       deviceType: 'esp32',
       dId: '12345678abcdefgh',
+      description: 'El mejor sistema embebido para el hogar y la Industria 4.0',
       nickname: 'ESP-32 humedadTemp',
       variables: ['humedad', 'temp'],
     },
@@ -19,6 +20,7 @@ export class DevicesService {
       deviceType: 'esp32',
       dId: '87654321abcdefgh',
       nickname: 'ESP-32 humedadTemp',
+      description: 'El best mejor sistema embebido para el hogar y la Industria 4.0',
       variables: ['humedad', 'temp'],
     }];
   }
