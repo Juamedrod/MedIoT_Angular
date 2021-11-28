@@ -12,6 +12,7 @@ export class RealtimeComponent implements OnInit {
   constructor() {
     this.arrConfig = [{
       displayType: displayType.BooleanDisplay,
+      displaySize: 'col-md-3',
       maxDataRepresentation: 10, //max number of inputs to display
       refreshInterval: 1000,
       variableId: 'testId',
@@ -20,7 +21,8 @@ export class RealtimeComponent implements OnInit {
       backgroundColorRGBA: 'rgba(29, 140, 248, 0.1)',
       fillArea: true
     }, {
-      displayType: displayType.BooleanDisplay,
+      displayType: displayType.Switch,
+      displaySize: 'col-md-3',
       maxDataRepresentation: 10, //max number of inputs to display
       refreshInterval: 2000,
       variableId: 'testId',
@@ -29,17 +31,19 @@ export class RealtimeComponent implements OnInit {
       backgroundColorRGBA: 'rgba(29, 140, 248, 0.1)',
       fillArea: true
     }, {
-      displayType: displayType.BooleanDisplay,
+      displayType: displayType.BarChart,
+      displaySize: 'col-md-6',
       maxDataRepresentation: 10, //max number of inputs to display
-      refreshInterval: 3000,
+      refreshInterval: 2000,
       variableId: 'testId',
       variableName: 'DefaultName',
       color: 'rgb(29, 140, 248)',//rba string for color representation
       backgroundColorRGBA: 'rgba(29, 140, 248, 0.1)',
       fillArea: true
     }, {
-      displayType: displayType.BooleanDisplay,
-      maxDataRepresentation: 10, //max number of inputs to display
+      displayType: displayType.LineChart,
+      displaySize: 'col-md-12',
+      maxDataRepresentation: 16, //max number of inputs to display
       refreshInterval: 3000,
       variableId: 'testId',
       variableName: 'DefaultName',

@@ -1,6 +1,7 @@
 <div class="container-fluid wrapper">
     <div class="row">
-        <div class="col-12 col-md-3 p-1 border" *ngFor="let config of arrConfig" [ngSwitch]="config.displayType">
+        <div class="col-12 p-1 border" *ngFor="let config of arrConfig" [ngSwitch]="config.displayType"
+            [ngClass]="config.displaySize! ">
             <switch *ngSwitchCase="3" [displayConfig]="config"></switch>
             <boolean-display *ngSwitchCase="4" [displayConfig]="config"></boolean-display>
             <chart *ngSwitchDefault [displayConfig]="config"></chart>
