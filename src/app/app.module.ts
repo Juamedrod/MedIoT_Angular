@@ -19,6 +19,7 @@ import { BooleanDisplayComponent } from './displayTypes/boolean-display/boolean-
 import { RealtimeComponent } from './asides/realtime/realtime.component';
 import { HistoryComponent } from './asides/history/history.component';
 import { DevicesComponent } from './asides/devices/devices.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { DevicesComponent } from './asides/devices/devices.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

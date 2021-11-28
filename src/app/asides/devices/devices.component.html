@@ -1,25 +1,25 @@
 <div class="container pb-2">
     <div class="row text-center p-2">
         <div class="col.12 p-3 wrapper text-center">
-            <h2 class="mt-2">REGISTER DEVICE</h2>
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()" novalidate>
+            <h2 class="mt-2">ADD DEVICE</h2>
+            <form [formGroup]="formulario" novalidate>
                 <div class="mb-3">
                     <label class="form-label">Device Type</label>
-                    <select class="form-select form-select-lg mb-3" formControlName="device"
+                    <select class="form-select form-select-lg mb-3" formControlName="deviceType"
                         aria-label=".form-select-lg ">
                         <option value=''>Select your device</option>
                         <option value="esp32">ESP32-DevKit1</option>
                         <option value="arduino">Arduino Uno</option>
                         <option value="raspberry">Raspberry Pi</option>
                     </select>
-                    <p class="error" *ngIf="checkError('device', 'required',true)">
+                    <p class="error" *ngIf="checkError('deviceType', 'required',true)">
                         El campo es requerido
                     </p>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Device Nickname</label>
-                    <input type="text" class="form-control" formControlName="deviceName">
-                    <p class="error" *ngIf="checkError('deviceName', 'required',true)">
+                    <input type="text" class="form-control" formControlName="nickname">
+                    <p class="error" *ngIf="checkError('nickname', 'required',true)">
                         El campo es requerido
                     </p>
                 </div>
@@ -30,9 +30,10 @@
                         El campo es requerido
                     </p>
                     <div class="py-2 d-flex justify-content-center align-items-center">
-                        <button class="btn btn-primary" (click)="validateId()">Validate ID</button>
+                        <button class="btn btn-primary" (click)="validateId($event)"
+                            [disabled]="this.formulario.get('dId')?.pristine">Validate ID</button>
                         <p class="m-0 ps-2" [ngClass]="{'success': idAvaliable, 'error': !idAvaliable}"
-                            *ngIf="this.formulario.get('dId')?.touched"> {{idAvaliable?
+                            *ngIf="this.formulario.get('dId')?.touched && clicked"> {{idAvaliable?
                             'Success!': 'ID is not avaliable'}}</p>
                     </div>
                 </div>
@@ -50,10 +51,69 @@
                         El campo es requerido
                     </p>
                 </div>
-                <input type="submit" value="ENVIAR" class="btn w-50 mt-2 btnform"
+                <button (click)="onSubmit()" class="btn w-25 mt-2 btnform"
                     [ngClass]="{'btn-danger': formulario.invalid, 'btn-success':formulario.valid}"
-                    [disabled]="!formulario.valid">
+                    [disabled]="!formulario.valid">SAVE </button>
             </form>
+        </div>
+    </div>
+    <div class="row py-5">
+        <div class="col-12 col-lg-4">
+            <div class="p-2">
+                <div class="card bg-transparent border-white p-lg-1">
+                    <h5 class="card-title text-center">ESP-32</h5>
+                    <div class="imgportrait" [ngStyle]="{'backgroundImage': 'url(/assets/images/esp32.png)'}"></div>
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's content.</p>
+                    </div>
+                    <p class="text-center">Variables</p>
+                    <ul class="list-group-flush bg-transparent list-group-numbered text-white">
+                        <li class="list-group-item bg-transparent text-white-50">An item</li>
+                        <li class="list-group-item bg-transparent text-white-50">A second item</li>
+                        <li class="list-group-item bg-transparent text-white-50">A third item</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <div class="p-2">
+                <div class="card bg-transparent border-white p-lg-1">
+                    <h5 class="card-title text-center">ESP-32</h5>
+                    <div class="imgportrait" [ngStyle]="{'backgroundImage': 'url(/assets/images/raspberry.png)'}"></div>
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's content.</p>
+                    </div>
+                    <p class="text-center">Variables</p>
+                    <ul class="list-group-flush bg-transparent list-group-numbered text-white">
+                        <li class="list-group-item bg-transparent text-white-50">An item</li>
+                        <li class="list-group-item bg-transparent text-white-50">A second item</li>
+                        <li class="list-group-item bg-transparent text-white-50">A third item</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <div class="p-2">
+                <div class="card bg-transparent border-white p-lg-1">
+                    <h5 class="card-title text-center">ESP-32</h5>
+                    <div class="imgportrait" [ngStyle]="{'backgroundImage': 'url(/assets/images/arduino.png)'}"></div>
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's content.</p>
+                    </div>
+                    <p class="text-center">Variables</p>
+                    <ul class="list-group-flush bg-transparent list-group-numbered text-white">
+                        <li class="list-group-item bg-transparent text-white-50">An item</li>
+                        <li class="list-group-item bg-transparent text-white-50">A second item</li>
+                        <li class="list-group-item bg-transparent text-white-50">A third item</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

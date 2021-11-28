@@ -56,3 +56,10 @@ i{
 label:last-child{
     color: lightgrey;
 }
+
+.imgportrait{
+    width: 100%;
+    height:300px;    
+    background-size: cover;
+    background-position: center center;
+}

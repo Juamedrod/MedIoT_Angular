@@ -18,6 +18,10 @@
     --ternaryFont: MuseoModerno;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body,nav{
     font-family:var(--secondaryFont);
     font-weight: 700;

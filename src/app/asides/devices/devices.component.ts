@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Device } from 'src/app/Interfaces/device.interface';
+import { DevicesService } from 'src/app/Services/devices.service';
 
 @Component({
   selector: 'app-devices',
@@ -8,15 +10,18 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 })
 export class DevicesComponent implements OnInit {
   formulario: FormGroup;
+  devices: Device[];
   variables: string[];
   idAvaliable: boolean;
-
-  constructor() {
+  clicked: boolean;
+  constructor(private devicesService: DevicesService) {
+    this.clicked = false;
     this.idAvaliable = false;
     this.variables = [];
+    this.devices = this.devicesService.getAll();
     this.formulario = new FormGroup({
-      device: new FormControl('', [Validators.required]),
-      deviceName: new FormControl('', [Validators.required]),
+      deviceType: new FormControl('', [Validators.required]),
+      nickname: new FormControl('', [Validators.required]),
       dId: new FormControl('', [Validators.required])
     });
   }
@@ -26,8 +31,15 @@ export class DevicesComponent implements OnInit {
 
   onSubmit() {
     if (this.formulario.invalid) return;
-    console.log(this.formulario.value);//enviar a la api
-
+    const device: Device = {
+      deviceType: this.formulario.get('deviceType')?.value,
+      dId: this.formulario.get('dId')?.value,
+      nickname: this.formulario.get('nickname')?.value,
+      variables: this.variables
+    }
+    this.devicesService.create(device);
+    console.log(device);//enviar a la api
+    this.formulario.reset();
   }
 
   checkError(controlName: string, error: string, touched: boolean): boolean | undefined {
@@ -43,7 +55,9 @@ export class DevicesComponent implements OnInit {
     this.variables.splice(index, 1);
   }
 
-  validateId() {
+  validateId($event: any) {
+    $event.stopPropagation();
+    this.clicked = true;
     this.idAvaliable = true;//Este metodo mira en la BD si el id unico ya está ocupado.
   }
 
