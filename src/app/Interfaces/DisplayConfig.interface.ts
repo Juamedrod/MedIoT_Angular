@@ -2,6 +2,7 @@ export enum displayType { LineChart, BarChart, PieChart, Switch, BooleanDisplay 
 
 export interface DisplayConfig {
     displayType: displayType,
+    displaySize?: string,
     maxDataRepresentation: number, //max number of inputs to display
     refreshInterval: number,
     variableId: string,
