@@ -20,6 +20,7 @@ import { RealtimeComponent } from './asides/realtime/realtime.component';
 import { HistoryComponent } from './asides/history/history.component';
 import { DevicesComponent } from './asides/devices/devices.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BlackboardItemComponent } from './asides/blackboard/blackboard-item/blackboard-item.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     BooleanDisplayComponent,
     RealtimeComponent,
     HistoryComponent,
-    DevicesComponent
+    DevicesComponent,
+    BlackboardItemComponent
   ],
   imports: [
     BrowserModule,

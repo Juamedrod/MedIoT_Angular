@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'boolean-display',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./boolean-display.component.css']
 })
 export class BooleanDisplayComponent implements OnInit {
+  @Input() variableNickname: string;
+  @Input() variableId: string;
+  @Input() variableState: boolean;
 
-  constructor() { }
+  constructor() {
+    this.variableId = '';
+    this.variableNickname = 'Variable ON/OFF Superguay!';
+    this.variableState = false;
+  }
 
   ngOnInit(): void {
   }
-
 }

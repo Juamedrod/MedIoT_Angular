@@ -19,6 +19,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
       displayType: displayType.LineChart,
       maxDataRepresentation: 10, //max number of inputs to display
       refreshInterval: 1000,
+      variableId: 'testId',
       variableName: 'DefaultName',
       color: 'rgb(29, 140, 248)',//rba string for color representation
       backgroundColorRGBA: 'rgba(29, 140, 248, 0.1)',
@@ -44,9 +45,9 @@ export class ChartComponent implements OnInit, AfterViewInit {
         this.interval = setInterval(() => {
           if (this.chart.data.labels.length >= this.displayConfig.maxDataRepresentation) {
             this.chartService.removeData(this.chart);
-            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call            
+            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call using variableId           
           } else {
-            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call
+            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call using variableId
           }
         }, this.displayConfig.refreshInterval);
 
@@ -63,9 +64,9 @@ export class ChartComponent implements OnInit, AfterViewInit {
         this.interval = setInterval(() => {
           if (this.chart.data.labels.length >= this.displayConfig.maxDataRepresentation) {
             this.chartService.removeData(this.chart);
-            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call            
+            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call  using variableId          
           } else {
-            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call
+            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call using variableId
           }
         }, this.displayConfig.refreshInterval);
 

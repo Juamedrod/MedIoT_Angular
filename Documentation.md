@@ -61,3 +61,23 @@ export interface pieChartConfig {
     scaleWithHover: number
 }
 ```
+## Inputs for every Display Type
+
+# Inputs for boolean-display
+```Typescript
+  @Input() variableId: string;
+  @Input() variableState: boolean;
+  @Input() variableNickname: string;
+```
+# Inputs for Switch
+```Typescript
+  @Input() variableId: string;
+  @Input() variableState: boolean;
+  @Input() variableNickname: string;
+  @Output() switchState: EventEmitter<any>;
+```
+
+## Devices
+Added devices capabilities to add and remove them easily. With a comprehensive UI that direct you easily to a fast to use configuration.
+
+Devices component make use of devicesService to feed data into it and command the CRUD for devices.

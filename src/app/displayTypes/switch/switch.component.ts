@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'switch',
@@ -6,14 +6,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./switch.component.css']
 })
 export class SwitchComponent implements OnInit {
+  @Input() variableId: string;
+  @Input() variableState: boolean;
+  @Input() variableNickname: string;
 
-  constructor() { }
+
+  constructor() {
+    this.variableId = '';
+    this.variableNickname = 'Variable ON/OFF Superguay!';
+    this.variableState = false;
+  }
 
   ngOnInit(): void {
   }
 
   changeState($event: any) {
-    console.log($event.target.checked);//API petition
+    this.variableState = $event.target.checked
+    const jsonState = {
+      variableId: this.variableId,
+      newState: this.variableState
+    }
+    console.log(jsonState);//cambiar por la llamada a la api
   }
-
 }

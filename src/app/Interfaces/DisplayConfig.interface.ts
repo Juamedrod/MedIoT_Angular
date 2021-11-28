@@ -4,6 +4,7 @@ export interface DisplayConfig {
     displayType: displayType,
     maxDataRepresentation: number, //max number of inputs to display
     refreshInterval: number,
+    variableId: string,
     variableName: string,
     color: string,//rba string for color representation
     backgroundColorRGBA: string,
@@ -22,9 +23,7 @@ export interface DisplayConfig {
      */
     colors?: string[],
     scaleWithHover?: number,
-    /**
-     * Switch Specifics
-     */
+
 
 
 
