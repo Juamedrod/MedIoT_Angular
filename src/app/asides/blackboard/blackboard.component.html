@@ -1,28 +1,34 @@
 <div class="container-fluid wrapper">
     <div class="row">
-        <div class="col-12 col-md-3 p-1 border">
-            <blackboard-item></blackboard-item>
+        <div class="col-12 p-5 border text-center" *ngFor="let config of arrConfig" [ngClass]="config.displaySize! ">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#setUpModal">
+                Click to Set-Up this display
+            </button>
         </div>
-        <div class="col-12 col-md-3 p-1 border">
-            <blackboard-item></blackboard-item>
-        </div>
-        <div class="col-12 col-md-3 p-1 border">
-            <blackboard-item></blackboard-item>
-        </div>
-        <div class="col-12 col-md-3 p-1 border">
-            <blackboard-item></blackboard-item>
-        </div>
-        <div class="col-12 col-md-6 p-1 border">
-            <blackboard-item></blackboard-item>
-        </div>
-        <div class="col-12 col-md-6 p-1 border">
-            <blackboard-item></blackboard-item>
-        </div>
-        <div class="col-12 col-md-12 p-1 border">
-            <blackboard-item></blackboard-item>
-        </div>
-        <div class="col-12 p-1 border">
-            <blackboard-item></blackboard-item>
+    </div>
+    <div class="row p-4">
+        <button class="btn btn-info text-dark " (click)="generateNewDisplay()">ADD DISPLAY</button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="setUpModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="modalTitle">Set UP your display Type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <select class="form-select form-select-lg mb-3" [(ngModel)]="tempConfig.variableName">
+                        <option class="text-dark" value=''>Select your Variable to Display</option>
+                        <option [value]="variable" *ngFor="let variable of userVariables">ESP32-DevKit1</option>
+                    </select><!-- ME QUEDE AQUIIIIIIIIIIIIIIIIII SEGUIR AQUIIII -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

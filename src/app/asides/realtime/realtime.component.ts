@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DisplayConfig, displayType } from 'src/app/Interfaces/DisplayConfig.interface';
+import { ApiService } from 'src/app/Services/api.service';
 
 @Component({
   selector: 'realtime',
@@ -9,8 +10,8 @@ import { DisplayConfig, displayType } from 'src/app/Interfaces/DisplayConfig.int
 export class RealtimeComponent implements OnInit {
   arrConfig: DisplayConfig[];
 
-  constructor() {
-    this.arrConfig = [{
+  constructor(private apiService: ApiService) {
+    this.arrConfig = [{   //llamada a la api para descargar la blackboard de este usuario OJO!!!!
       displayType: displayType.BooleanDisplay,
       displaySize: 'col-md-3',
       maxDataRepresentation: 10, //max number of inputs to display

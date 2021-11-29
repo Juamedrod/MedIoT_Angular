@@ -1,3 +1,17 @@
+div{
+    font-family: var(--mainFont);
+    font-weight: 300;
+}
+
+button{
+    font-family: var(--ternaryFont);
+    font-weight: 300;
+}
+
+.modal-body{
+    font-family: var(--secondaryFont);
+}
+
 .wrapper>div:last-child{
     margin-bottom: 70px;
     padding: 10px;

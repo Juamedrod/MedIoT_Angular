@@ -1,4 +1,5 @@
 export enum displayType { LineChart, BarChart, PieChart, Switch, BooleanDisplay };
+export const sizes = new Map([['small', 'col-md-3'], ['medium', 'col-md-6'], ['large', 'col-md-12']]);
 
 export interface DisplayConfig {
     displayType: displayType,
