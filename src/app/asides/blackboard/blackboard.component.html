@@ -1,8 +1,10 @@
 <div class="container-fluid wrapper">
     <div class="row">
-        <div class="col-12 p-5 border text-center" *ngFor="let config of arrConfig" [ngClass]="config.displaySize! ">
+        <div class="col-12 p-5 border text-center" *ngFor="let config of arrConfig; let index=index"
+            [ngClass]="config.displaySize! ">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#setUpModal">
+            <button type="button" class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#setUpModal"
+                (click)="setActiveDisplay(index)">
                 Click to Set-Up this display
             </button>
         </div>
@@ -15,18 +17,103 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-dark" id="modalTitle">Set UP your display Type</h5>
+                    <h5 class="modal-title text-dark" id="modalTitle">Set UP your display Type {{activeDisplay}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <select class="form-select form-select-lg mb-3" [(ngModel)]="tempConfig.variableName">
-                        <option class="text-dark" value=''>Select your Variable to Display</option>
-                        <option [value]="variable" *ngFor="let variable of userVariables">ESP32-DevKit1</option>
-                    </select><!-- ME QUEDE AQUIIIIIIIIIIIIIIIIII SEGUIR AQUIIII -->
+                    <select class="form-select form-select-lg mb-3" #selectDevice
+                        (input)="setVariables(selectDevice.value)" [(ngModel)]="tempConfig.dId">
+                        <option class="text-dark" value=''>Select your Device</option>
+                        <option [value]="device.dId" *ngFor="let device of devices; let index=index">{{device.nickname}}
+                        </option>
+                    </select>
+                    <select class="form-select form-select-lg mb-3" [(ngModel)]="tempConfig.variableId">
+                        <option class="text-dark" value=''>Select your Variable</option>
+                        <option [value]="variable" *ngFor="let variable of varsOfThisDevice; let index=index">
+                            {{variable}}
+                        </option>
+                    </select>
+                    <select class="form-select form-select-lg mb-3" [(ngModel)]="tempConfig._displayType">
+                        <option class="text-dark" value=''>Select the type of display</option>
+                        <option [value]="(index)" *ngFor="let displayType of displayTypes; let index=index">
+                            {{displayType}}
+                        </option>
+                    </select>
+                    <select class="form-select form-select-lg mb-3" [(ngModel)]="tempConfig.displaySize">
+                        <option class="text-dark" value=''>Select the size of display</option>
+                        <option class="text-dark" value='col-md-3'>Small (25% screen)</option>
+                        <option class="text-dark" value='col-md-6'>Medium (50% screen)</option>
+                        <option class="text-dark" value='col-md-12'>Large (100% screen)</option>
+                    </select>
+                    <div class=" form-floating mb-3">
+                        <input type="number" class="form-control " id="maxDataRepresentation"
+                            [(ngModel)]="tempConfig.maxDataRepresentation">
+                        <label for="maxDataRepresentation" class="text-dark">Number of values to be displayed</label>
+                    </div>
+                    <div class=" form-floating mb-3">
+                        <input type="number" class="form-control " id="refreshInterval"
+                            [(ngModel)]="tempConfig.refreshInterval">
+                        <label for="refreshInterval" class="text-dark">Interval between pings to the API in milliseconds
+                            (ms)</label>
+                    </div>
+                    <div class=" form-floating mb-3">
+                        <input type="color" class="form-control " id="color" [(ngModel)]="tempConfig._color">
+                        <label for="color" class="text-dark">Chart color</label>
+                    </div>
+                    <div class=" form-floating mb-3">
+                        <input type="color" colorformat="rgba" class="form-control " id="backgroundColorRGBA"
+                            [(ngModel)]="tempConfig._backgroundColorRGBA">
+                        <label for="backgroundColorRGBA" class="text-dark">Chart Background Color</label>
+                    </div>
+                    <!-- Line options -->
+                    <div class=" form-floating mb-3" *ngIf="tempConfig._displayType==0">
+                        <input type="text" class="form-control " id="chartName" [(ngModel)]="tempConfig.chartName">
+                        <label for="chartName" class="text-dark">Chart Name</label>
+                    </div>
+                    <div class=" mb-3 text-center" *ngIf="tempConfig._displayType==0">
+                        <label for="tension" class="text-dark form-label text-center">Curvature between points in the
+                            chart, higher numbers end in smoother curves: {{tempConfig.tension}}</label>
+                        <div class="d-flex justify-content-center">
+                            <p class="text-dark pe-2">0</p>
+                            <input type="range" min="0" max="1" step="0.1" class="form-range w-75" id="tension"
+                                [(ngModel)]="tempConfig.tension">
+                            <p class="text-dark ps-2">1</p>
+                        </div>
+                    </div>
+                    <div class="form-check form-switch mb-3 " *ngIf="tempConfig._displayType==0">
+                        <input class="form-check-input w-25" type="checkbox" id="fillArea"
+                            [(ngModel)]="tempConfig.fillArea">
+                        <label class="form-check-label text-dark ps-2" for="fillArea">Fill the area under the
+                            chart?</label>
+                    </div>
+                    <!-- Bar type options -->
+                    <div class=" mb-3 text-center" *ngIf="tempConfig._displayType==1">
+                        <label for="borderWidth" class="text-dark form-label text-center">Border width:
+                            {{tempConfig.borderWidth}}</label>
+                        <div class="d-flex justify-content-center">
+                            <p class="text-dark pe-2">0</p>
+                            <input type="range" min="0" max="10" step="1" class="form-range w-75" id="borderWidth"
+                                [(ngModel)]="tempConfig.borderWidth">
+                            <p class="text-dark ps-2">10</p>
+                        </div>
+                    </div>
+                    <!-- Pie type options -->
+                    <div class=" mb-3 text-center" *ngIf="tempConfig._displayType==2">
+                        <label for="scaleWithHover" class="text-dark form-label text-center">Hover pie scale:
+                            {{tempConfig.scaleWithHover}}</label>
+                        <div class="d-flex justify-content-center">
+                            <p class="text-dark pe-2">0</p>
+                            <input type="range" min="0" max="10" step="1" class="form-range w-75" id="scaleWithHover"
+                                [(ngModel)]="tempConfig.scaleWithHover">
+                            <p class="text-dark ps-2">10</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <p class="text-success" *ngIf="saved">Settings saved!</p>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="savedCentinelReset()">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="saveDisplayConfig()">Save changes</button>
                 </div>
             </div>
         </div>

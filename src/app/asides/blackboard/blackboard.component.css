@@ -8,8 +8,12 @@ button{
     font-weight: 300;
 }
 
-.modal-body{
+.modal-body, label, h5{
     font-family: var(--secondaryFont);
+}
+
+label{
+    font-size: 90%;   
 }
 
 .wrapper>div:last-child{

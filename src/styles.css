@@ -26,8 +26,7 @@ body,nav{
     font-family:var(--secondaryFont);
     font-weight: 700;
     background-color: var(--mainColor) ;
-    color: white;
-    text-shadow: 1px 1px 1px black,0px 0px 20px var(--mainColor);  
+    color: white;     
 }
 
 h1,h2{

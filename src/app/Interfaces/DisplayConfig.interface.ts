@@ -1,13 +1,13 @@
 export enum displayType { LineChart, BarChart, PieChart, Switch, BooleanDisplay };
-export const sizes = new Map([['small', 'col-md-3'], ['medium', 'col-md-6'], ['large', 'col-md-12']]);
 
 export interface DisplayConfig {
+    dId?: string,
     displayType: displayType,
     displaySize?: string,
     maxDataRepresentation: number, //max number of inputs to display
     refreshInterval: number,
-    variableId: string,
-    variableName: string,
+    variableId: string,//id the user assign at device creation
+    variableName: string,//name avaliable for the display instead of Id
     color: string,//rba string for color representation
     backgroundColorRGBA: string,
     /**
