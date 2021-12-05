@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../Services/auth.service';
 
 @Component({
   selector: 'login',
@@ -9,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   formulario: FormGroup;
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
     this.formulario = new FormGroup({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
@@ -23,9 +25,24 @@ export class LoginComponent implements OnInit {
     return this.formulario.invalid && this.formulario.get('password')!.touched
   }
 
-  onsubmit() {
-    console.log(this.formulario.value);
+  async onsubmit() {
+    if (this.formulario.invalid) return;
+    try {
+      const response = await this.authService.login(this.formulario.value)
+      if (response == undefined || response.error) {
+        console.log(response);
+        //message system to show the error
+        return;
+      }
+      localStorage.setItem('authCredentials', response.token);
+      this.authService.setToken(response.token);
+      //message system para avisar al usuario del login correcto
+      console.log('Exito!');
+      this.router.navigate(['/dashboard']);
 
+    } catch (error: any) {
+      console.log(error.error);
+    }
   }
 
 }
