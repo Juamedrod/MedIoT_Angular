@@ -4,31 +4,23 @@
             <h2 class="mt-2">REGISTER</h2>
             <form [formGroup]="formulario" (ngSubmit)="onSubmit()" novalidate>
                 <div class="mb-3">
-                    <label class="form-label">Nombre</label>
-                    <input type="text" class="form-control" formControlName="nombre">
-                    <!--   <p class="error" *ngIf="formulario.get('nombre')?.errors && formulario.get('nombre')?.touched">
-                    El campo es requerido y tiene que tener 4 caracteres como mínimo
-                </p> -->
-                    <p class="error" *ngIf="checkError('nombre', 'required',true)">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                    <p class="error" *ngIf="checkError('name', 'required',true)">
                         El campo es requerido
                     </p>
-                    <p class="error" *ngIf="checkError('nombre', 'minlength',true)">
+                    <p class="error" *ngIf="checkError('name', 'minlength',true)">
                         El campo necesita una longitud minima de 4 caracteres
                     </p>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Apellidos</label>
-                    <input type="text" class="form-control" formControlName="apellidos">
-                    <p class="error" *ngIf="checkError('apellidos', 'required',true)">
+                    <label class="form-label">surname</label>
+                    <input type="text" class="form-control" formControlName="surname">
+                    <p class="error" *ngIf="checkError('surname', 'required',true)">
                         El campo es requerido
                     </p>
-                    <p class="error" *ngIf="checkError('apellidos', 'minlength',true)">
+                    <p class="error" *ngIf="checkError('name', 'minlength',true)">
                         El campo necesita una longitud minima de 4 caracteres
-                    </p>
-                    <p class="error" *ngIf="checkError('apellidos', 'maxlength',true)">
-                        El campo necesita una longitud maxima de
-                        {{formulario.get('apellidos')!.errors!.maxlength.requiredLength}}
-                        caracteres
                     </p>
                 </div>
                 <div class="mb-3">

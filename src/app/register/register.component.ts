@@ -12,8 +12,8 @@ export class RegisterComponent implements OnInit {
 
   constructor() {
     this.formulario = new FormGroup({
-      nombre: new FormControl('', [Validators.required]),
-      apellidos: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      surname: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('',
         [
           Validators.required,
@@ -37,8 +37,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.formulario.invalid) return;
-    console.log(this.formulario.value);
-
+    console.log(this.formulario.value);//api call to register user and return token
   }
 
   checkError(controlName: string, error: string, touched: boolean): boolean | undefined {
@@ -46,19 +45,6 @@ export class RegisterComponent implements OnInit {
   }
 
   //VALIDADORES
-
-  edadValidator(control: AbstractControl) {
-    const edadValue = parseInt(control.value);
-    const minAge = 18;
-    const maxAge = 99;
-
-    if (edadValue >= minAge && edadValue <= maxAge) {
-      return null;
-    } else {
-      return { edadvalidator: { min: minAge, max: maxAge, msg: `La edad no está entre ${minAge} y ${maxAge}` } };
-    }
-  }
-
   dniValidator(control: AbstractControl) {
     let dni = control.value;
     let numero: number = parseInt(dni.substring(0, dni.length));
