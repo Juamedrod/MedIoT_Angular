@@ -45,7 +45,8 @@
                         <option class="text-dark" value='col-md-6'>Medium (50% screen)</option>
                         <option class="text-dark" value='col-md-12'>Large (100% screen)</option>
                     </select>
-                    <div class=" form-floating mb-3">
+                    <div class=" form-floating mb-3 "
+                        *ngIf=" (tempConfig._displayType!=3 && tempConfig._displayType!=4)">
                         <input type="number" class="form-control " id="maxDataRepresentation"
                             [(ngModel)]="tempConfig.maxDataRepresentation">
                         <label for="maxDataRepresentation" class="text-dark">Number of values to be displayed</label>
@@ -56,11 +57,13 @@
                         <label for="refreshInterval" class="text-dark">Interval between pings to the API in milliseconds
                             (ms)</label>
                     </div>
-                    <div class=" form-floating mb-3">
+                    <div class=" form-floating mb-3"
+                        *ngIf=" (tempConfig._displayType!=3 && tempConfig._displayType!=4)">
                         <input type="color" class="form-control " id="color" [(ngModel)]="tempConfig._color">
                         <label for="color" class="text-dark">Chart color</label>
                     </div>
-                    <div class=" form-floating mb-3">
+                    <div class=" form-floating mb-3"
+                        *ngIf=" (tempConfig._displayType!=3 && tempConfig._displayType!=4)">
                         <input type="color" colorformat="rgba" class="form-control " id="backgroundColorRGBA"
                             [(ngModel)]="tempConfig._backgroundColorRGBA">
                         <label for="backgroundColorRGBA" class="text-dark">Chart Background Color</label>

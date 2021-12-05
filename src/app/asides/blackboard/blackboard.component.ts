@@ -29,7 +29,7 @@ export class BlackboardComponent implements OnInit {
     this.devices = [];
     this.tempConfig = {
       dId: '',
-      _displayType: displayType.BooleanDisplay,
+      _displayType: "",
       displaySize: '',
       maxDataRepresentation: 10, //max number of inputs to display
       refreshInterval: 1000,
@@ -128,7 +128,7 @@ export class BlackboardComponent implements OnInit {
   generateNewDisplay(): void {
     this.arrConfig.push({
       dId: '',
-      displayType: displayType.BooleanDisplay,
+      displayType: displayType.LineChart,
       displaySize: 'col-md-3',
       maxDataRepresentation: 10, //max number of inputs to display
       refreshInterval: 1000,

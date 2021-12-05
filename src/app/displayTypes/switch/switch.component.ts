@@ -10,8 +10,6 @@ export class SwitchComponent implements OnInit {
   @Input() displayConfig: DisplayConfig;
   variableState: boolean;
 
-
-
   constructor() {
     this.displayConfig = {
       displayType: displayType.Switch,
