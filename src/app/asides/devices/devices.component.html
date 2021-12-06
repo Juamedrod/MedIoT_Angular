@@ -31,7 +31,8 @@
                     </p>
                 </div>
                 <div class=" form-floating mb-3">
-                    <input type="text" class="form-control text-dark" id="floatingInputDid" formControlName="dId">
+                    <input type="text" class="form-control text-dark" id="floatingInputDid" formControlName="dId"
+                        (input)="resetButton()">
                     <label for="floatingInputDid">Device Unique ID</label>
                     <p class="error" *ngIf="checkError('dId', 'required',true)">
                         El campo es requerido
@@ -64,25 +65,25 @@
                     </p>
                 </div>
                 <button (click)="onSubmit()" class="btn w-25 mt-2 btnform "
-                    [ngClass]="{'btn-danger': formulario.invalid,'bg-opacity-50':formulario.invalid ,'btn-success':formulario.valid, 'bg-opacity-100':formulario.valid}"
-                    [disabled]="!formulario.valid">SAVE </button>
+                    [ngClass]="{'btn-danger': formulario.invalid || !idAvaliable,'bg-opacity-50':formulario.invalid|| !idAvaliable ,'btn-success':formulario.valid && idAvaliable, 'bg-opacity-100':formulario.valid && idAvaliable}"
+                    [disabled]="!formulario.valid && !idAvaliable">SAVE </button>
             </form>
         </div>
     </div>
     <h2 class="text-center mt-5">Active Devices</h2>
     <div class="row pt-3 pb-5">
         <div class="col-12 col-lg-4 " *ngFor="let device of devices">
-            <div class="p-2">
-                <div class="card bg-transparent border-success p-lg-1 device">
+            <div class="p-2  ">
+                <div class="card bg-transparent p-lg-1 device border-success">
                     <h5 class="card-title text-center">{{device.deviceType}}</h5>
                     <div class="imgportrait"
                         [ngStyle]="{'backgroundImage': 'url(/assets/images/'+device.deviceType+'.png)'}"></div>
                     <div class="card-body">
-                        <p class="card-text">{{device.description}}</p>
+                        <p class="card-text text-center">{{device.description}}</p>
                     </div>
-                    <p class="text-center">Variables</p>
+                    <p class="text-center text-muted">Variables</p>
                     <ul class="list-group-flush bg-transparent list-group-numbered text-white">
-                        <li class="list-group-item bg-transparent text-white-50"
+                        <li class="list-group-item bg-transparent text-white-50 text-start"
                             *ngFor="let variable of device.variables">{{variable}}</li>
                     </ul>
                 </div>

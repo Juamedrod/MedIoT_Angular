@@ -1,47 +1,40 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Device } from '../Interfaces/device.interface';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DevicesService {
   devices: Device[];
+  baseURL: string;
 
-  constructor(private httpClient: HttpClient) {
-    this.devices = [{
-      deviceType: 'esp32',
-      dId: '12345678abcdefgh',
-      description: 'El mejor sistema embebido para el hogar y la Industria 4.0',
-      nickname: 'ESP-32 Cocina',
-      variables: ['humedad', 'temp'],
-    },
-    {
-      deviceType: 'esp32',
-      dId: '87654321abcdefgh',
-      nickname: 'ESP-32 Salon',
-      description: 'El best mejor sistema embebido para el hogar y la Industria 4.0',
-      variables: ['Ultrasonidos', 'temp'],
-    }];
+  constructor(private httpClient: HttpClient, private authService: AuthService) {
+    this.baseURL = "http://192.168.1.39:3000/api/devices";
+    this.devices = [];
   }
 
   /**
    * Get All devices for this user from the API.
    */
-  getAll(): Device[] {
-    return this.devices;
+  getAll(): Promise<Device[]> {
+    return this.httpClient.get<Device[]>(this.baseURL, this.authService.getAuthHeaders()).toPromise();
   }
 
-  create(device: Device): void {
-    this.devices.push(device);
-    //http petition to create a new device
+  create(device: Device): Promise<Device> {
+    return this.httpClient.post<Device>(this.baseURL, device, this.authService.getAuthHeaders()).toPromise();
   }
 
-  edit(id: string): void {
-    //http petition to edit an existing device
+  checkId(dId: string) {
+    return this.httpClient.post<any>(this.baseURL + '/checkid', { dId }, this.authService.getAuthHeaders()).toPromise();
   }
 
-  remove(id: string): void {
-    //http petition to remove an existing user
+  edit(device: Device): Promise<Device> {
+    return this.httpClient.put<Device>(this.baseURL, device, this.authService.getAuthHeaders()).toPromise();
+  }
+
+  remove(did: string): any {
+    return this.httpClient.delete<any>(this.baseURL + '/' + did, this.authService.getAuthHeaders()).toPromise();
   }
 }

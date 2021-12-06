@@ -85,5 +85,7 @@ i{
 
 .device{
     box-shadow: 1px 1px 3px lightgrey;
+    min-height: 575px;
 }
+
 

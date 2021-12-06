@@ -14,6 +14,7 @@ export class DevicesComponent implements OnInit {
   variables: string[];
   idAvaliable: boolean;
   clicked: boolean;
+
   constructor(private devicesService: DevicesService) {
     this.clicked = false;
     this.idAvaliable = false;
@@ -27,26 +28,29 @@ export class DevicesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.devices = this.devicesService.getAll();
+  async ngOnInit() {
+    this.devices = await this.devicesService.getAll();
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.formulario.invalid || !this.idAvaliable) return;
+    let variables = [];
+    for (let i = 0; i < this.variables.length; i++) {
+      variables.push(this.formulario.get(`variable${i + 1}`)?.value);
+    };
     const device: Device = {
       deviceType: this.formulario.get('deviceType')?.value,
       description: this.formulario.get('description')?.value,
       dId: this.formulario.get('dId')?.value,
       nickname: this.formulario.get('nickname')?.value,
-      variables: this.variables
+      variables: variables
     }
-    this.devicesService.create(device);
-    console.log(device);//enviar a la api
+    const newDevice = await this.devicesService.create(device);
+    console.log({ newDevice });//enviar a la api
     this.formulario.reset();
-  }
-
-  checkError(controlName: string, error: string, touched: boolean): boolean | undefined {
-    return touched ? this.formulario.get(controlName)?.hasError(error) && this.formulario.get(controlName)?.touched : this.formulario.get(controlName)?.hasError(error);
+    this.clicked = false;
+    this.idAvaliable = false;
+    this.devices = await this.devicesService.getAll();
   }
 
   addVariableToForm() {
@@ -59,11 +63,24 @@ export class DevicesComponent implements OnInit {
     this.variables.splice(index, 1);
   }
 
-  validateId($event: any) {
-    $event.stopPropagation();
+  async validateId($event: any) {
+    const response = await this.devicesService.checkId(this.formulario.get('dId')!.value);
+    if (response.avaliable != true) {
+      this.idAvaliable = false;
+    } else {
+      this.idAvaliable = true;//Este metodo mira en la BD si el id unico ya está ocupado.
+    }
     this.clicked = true;
-    this.idAvaliable = true;//Este metodo mira en la BD si el id unico ya está ocupado.
+  }
+
+  resetButton() {
+    this.idAvaliable = false;
+    this.clicked = false
   }
 
   //CUSTOM VALIDATORS
+  checkError(controlName: string, error: string, touched: boolean): boolean | undefined {
+    return touched ? this.formulario.get(controlName)?.hasError(error) && this.formulario.get(controlName)?.touched : this.formulario.get(controlName)?.hasError(error);
+  }
+
 }

@@ -46,8 +46,8 @@ export class BlackboardComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.devices = this.devicesService.getAll();
+  async ngOnInit() {
+    this.devices = await this.devicesService.getAll();
     this.arrConfig = this.blackboardService.getArrConfig();
     //Rellenar devices con las variables del usuario via API !!  
   }
