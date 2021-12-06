@@ -4,8 +4,6 @@ import { DisplayConfig, displayType } from 'src/app/Interfaces/DisplayConfig.int
 import { BlackboardService } from 'src/app/Services/blackboard.service';
 import { DevicesService } from 'src/app/Services/devices.service';
 
-
-
 @Component({
   selector: 'blackboard',
   templateUrl: './blackboard.component.html',
@@ -16,7 +14,7 @@ export class BlackboardComponent implements OnInit {
   tempConfig: any;//this var saves the actual state in teh modal for the display being edited
   devices: Device[];//the devices this user has registered.
   activeDisplay: number;//the actual blackboard display that has opened the modal for edition.
-  varsOfThisDevice: string[];//variables asociated to the device selcted in the modal
+  varsOfThisDevice: string[];//variables asociated to the device selected in the modal
   displayTypes: string[] = [];
   saved: boolean;
 
@@ -43,13 +41,16 @@ export class BlackboardComponent implements OnInit {
       borderWidth: 1,
       scaleWithHover: 1
     };
-
   }
 
   async ngOnInit() {
     this.devices = await this.devicesService.getAll();
-    this.arrConfig = this.blackboardService.getArrConfig();
-    //Rellenar devices con las variables del usuario via API !!  
+    const response = await this.blackboardService.getArrConfig();
+    if (response.length === 0) {
+      this.blackboardService.storeArrConfig(this.arrConfig);
+    } else {
+      this.arrConfig = response[0].arrConfig;
+    }
   }
 
   /**
@@ -62,7 +63,7 @@ export class BlackboardComponent implements OnInit {
   /**
   * Save the temporary configuration to be final.
   */
-  saveDisplayConfig() {
+  async saveDisplayConfig() {
     const newDisplayConfig = {
       dId: this.tempConfig.dId,
       displayType: parseInt(this.tempConfig._displayType),
@@ -70,7 +71,7 @@ export class BlackboardComponent implements OnInit {
       maxDataRepresentation: this.tempConfig.maxDataRepresentation, //max number of inputs to display
       refreshInterval: this.tempConfig.refreshInterval,
       variableId: this.tempConfig.variableId,
-      variableName: this.tempConfig.variableName,
+      variableName: this.tempConfig.variableId,
       color: this.tempConfig._color,//rgba string for color representation
       backgroundColorRGBA: this.tempConfig._backgroundColorRGBA,
       fillArea: this.tempConfig.fillArea,
@@ -83,7 +84,7 @@ export class BlackboardComponent implements OnInit {
     this.arrConfig[this.activeDisplay] = newDisplayConfig;
     /* this.resetTemp(); */
     this.saved = true;
-    this.blackboardService.storeArrConfig(this.arrConfig);
+    await this.blackboardService.updateArrConfig(this.arrConfig);
   }
 
   /**
@@ -119,7 +120,6 @@ export class BlackboardComponent implements OnInit {
     this.tempConfig.tension = this.arrConfig[index].tension;
     this.tempConfig.borderWidth = this.arrConfig[index].borderWidth;
     this.tempConfig.scaleWithHover = this.arrConfig[index].scaleWithHover;
-
   }
 
   /**
@@ -163,7 +163,16 @@ export class BlackboardComponent implements OnInit {
   }
 
   /**
-   * Set up the display types dinamically in order to this feature to be scale without extra coding.
+   *  Remove the display from the list
+   */
+  async removeDisplay(index: number) {
+    this.arrConfig.splice(index, 1);
+    const response = await this.blackboardService.updateArrConfig(this.arrConfig);
+  }
+
+  /**
+   * Set up the display types dinamically in order to this feature to scale without extra coding.
+   * Allow the select input to scale the successive inputs without coding it, it automatically scale
    */
   setUpDisplayTypes() {
     this.displayTypes = [...Object.keys(displayType)].filter(key => {
