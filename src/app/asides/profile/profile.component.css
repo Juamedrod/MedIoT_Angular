@@ -1,0 +1,27 @@
+div,h2{
+    font-family: var(--ternaryFont);
+    font-weight: 300;
+}
+
+button{
+    font-family: var(--secondaryFont);
+}
+
+.marco{
+    background-position: center center;
+    background-size:contain; 
+    background-repeat: no-repeat;   
+    height: 300px;
+}
+
+.ng-touched.ng-invalid:not(form){
+    border: 2px solid tomato;
+}
+
+.ng-touched.ng-valid:not(form){
+    border: 2px solid lightgreen;
+}
+
+.error{
+    color: tomato;
+}

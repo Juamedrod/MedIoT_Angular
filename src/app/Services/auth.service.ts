@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { User } from '../Interfaces/user.interface';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -73,11 +72,19 @@ export class AuthService {
   }
 
   /**
- * Retrieve Active User
- * @returns  {User} User active
+ * Retrieve Active User decrypted in token(NO API CALL)
+ * @returns  {User} User active in short format
  */
   getUser() {
     return this.user;
+  }
+
+  /**
+ * Retrieve Active User detailed (API CALL)
+ * @returns  {User} User active in full format
+ */
+  getUserAPI(): Promise<User> {
+    return this.httpClient.get<User>(this.baseUrl, this.getAuthHeaders()).toPromise();
   }
 
   /**
@@ -97,4 +104,23 @@ export class AuthService {
   login(credentials: any) {
     return this.httpClient.post<any>(this.baseUrl + '/login', credentials).toPromise();
   }
+
+  /**
+ * Update user info
+ * @param {User} user Updated user
+ * @returns  {Promise<User>} Promise with the user updated
+ */
+  update(user: User): Promise<User> {
+    return this.httpClient.put<User>(this.baseUrl, user, this.getAuthHeaders()).toPromise();
+  }
+
+  /**
+* Remove user from the database
+* @param {User} user User to be removed
+* @returns  {Object} Object
+*/
+  remove(user: User): Promise<Object> {
+    return this.httpClient.delete(this.baseUrl, this.getAuthHeaders()).toPromise();
+  }
+
 }

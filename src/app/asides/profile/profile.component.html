@@ -1,6 +1,134 @@
-<div class="container-fluid wrapper">
-    <h2>User Profile</h2>
-    <p>{{user|json}}</p>
+<div class="container-fluid ">
+    <div class="row text-center pt-3">
+        <h2>User Profile</h2>
+    </div>
+    <div class="row text-center pt-2">
+        <p class="mb-3 fst-italic">Welcome to your profile page, <strong>{{user.name}}</strong>.</p>
+        <p class="mb-3 text-muted">What action do you want to perform?</p>
+        <div class="m-1">
+            <button class="btn btn-primary pe-md-1 col-12  col-md-3" (click)="setView(0)">VIEW PROFILE</button>
+            <button class="btn btn-primary my-2 my-md-0 mx-md-2 ps-md-1 pe-md-1 col-12 col-md-3"
+                (click)="setView(1)">EDIT
+                PROFILE</button>
+            <button class="btn btn-danger ps-md-1 col-12 col-md-3" (click)="setView(2)">REMOVE PROFILE</button>
+        </div>
+    </div>
 
+    <div class="content row text-center pt-2 pb-5" *ngIf="switcher==0">
+        <div class="col-8 offset-2 border text-center mb-3">
+            <h3 class="p-2">This is your actual User Info</h3>
+            <hr>
+            <div class=" text-center">
+                <i *ngIf="!user.avatar" class="fas fa-user-ninja fs-1 text-center"></i>
+                <div *ngIf="user.avatar" class="marco" [ngStyle]="{'backgroundImage': 'url(' + user.avatar + ')'}">
+                </div>
+            </div>
+            <hr>
+            <p><span class="text-muted">name:</span> {{user.name}}</p>
+            <hr>
+            <p><span class="text-muted">surname:</span> {{user.surname}}</p>
+            <hr>
+            <p><span class="text-muted">email:</span> {{user.email}}</p>
+            <hr>
+            <p><span class="text-muted">dni:</span> {{user.dni}}</p>
+            <hr>
+            <p><span class="text-muted">Profile created at:</span> {{user.createdAt | date}}</p>
+        </div>
+    </div>
 
+    <div class="content row text-center pt-2 pb-3 " *ngIf="switcher==1">
+        <div class="col-8 offset-2 border">
+            <form class="p-2" [formGroup]="formulario" (ngSubmit)="onSubmit()" novalidate>
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                    <p class="error" *ngIf="checkError('name', 'required',true)">
+                        El campo es requerido
+                    </p>
+                    <p class="error" *ngIf="checkError('name', 'minlength',true)">
+                        El campo necesita una longitud minima de 4 caracteres
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Surname</label>
+                    <input type="text" class="form-control" formControlName="surname">
+                    <p class="error" *ngIf="checkError('surname', 'required',true)">
+                        El campo es requerido
+                    </p>
+                    <p class="error" *ngIf="checkError('name', 'minlength',true)">
+                        El campo necesita una longitud minima de 4 caracteres
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Avatar</label>
+                    <input type="text" class="form-control" formControlName="avatar">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" formControlName="email">
+                    <p class="error" *ngIf="checkError('email', 'required',true)">
+                        El campo es requerido.
+                    </p>
+                    <p class="error" *ngIf="checkError('email', 'pattern',false)">
+                        El campo email debe ser un email correcto.
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Dni</label>
+                    <input type="text" class="form-control" formControlName="dni">
+                    <p class="error" *ngIf="checkError('dni', 'dnivalidator',true)">
+                        DNI incorrecto.
+                    </p>
+                </div>
+
+                <input type="submit" value="SAVE" class="btn w-50 mt-2 btnform"
+                    [ngClass]="{'btn-danger': formulario.invalid, 'btn-success':formulario.valid}"
+                    [disabled]="!formulario.valid">
+            </form>
+        </div>
+    </div>
+
+    <div class="content row text-center pt-2" *ngIf="switcher==2">
+        <div class="col-8 offset-2 border p-2">
+            <div class="text-center">
+                <h3 class="p-2 text-danger">YOU ARE GOING TO DO SOME CRAZY SHIT!!!!</h3>
+                <button class="btn btn-success me-2" (click)="eraseRoulette(0)">I dont want to do it!</button><button
+                    class="btn btn-danger" (click)="eraseRoulette(1)">are you sure?</button>
+            </div>
+            <div class="text-center" *ngIf="eraserRoullete>=1">
+                <p class="p-2 text-white">Ok, lets chill!! we are both too nervious!</p>
+                <button class="btn btn-success me-2" (click)="eraseRoulette(0)">I am
+                    chill!</button><button class="btn btn-danger" (click)="eraseRoulette(2)">may the world burn</button>
+            </div>
+            <div class="text-center" *ngIf="eraserRoullete>=2">
+                <p class="p-2 text-white">I think I told you to chill down , breathe, relax and stop that fingers.</p>
+                <button class="btn btn-success me-2" (click)="eraseRoulette(0)">I am
+                    chill!</button><button (click)="eraseRoulette(3)" class="btn btn-danger">Erase it, god
+                    dammit!</button>
+            </div>
+            <div class="text-center" *ngIf="eraserRoullete>=3">
+                <p class="p-2 text-white">😡😡😡Enough of this, I am out, I wont warn you more, delete it if you
+                    want.😡😡😡</p>
+                <button class="btn btn-success me-2" (click)="eraseRoulette(0)">Emojis convinced me, keep my
+                    data!❤</button><button (click)="eraseRoulette(4)" class="btn btn-danger">Erase it, god
+                    dammit!</button>
+            </div>
+            <div class="text-center" *ngIf="eraserRoullete>=4">
+                <p class="p-2 text-white">I know, I know, I just...cant let you go like this....</p>
+                <button class="btn btn-success me-2" (click)="eraseRoulette(0)">you touched my potatoe, I am in
+                    again!</button><button (click)="eraseRoulette(5)" class="btn btn-danger">Isn't it
+                    harrassment?</button>
+            </div>
+            <div class="text-center" *ngIf="eraserRoullete>=5">
+                <p class="p-2 text-white">This is your last chance to save everything we built</p>
+                <p class="p-2 text-danger">PRESSING "DELETE ACCOUNT" ,WE WILL REMOVE EVERY TRACE OF YOU FROM THE SERVERS
+                </p>
+                <button class="btn btn-success me-2" (click)="eraseRoulette(0)">Get me back safe!!</button><button
+                    (click)="eraseRoulette(6)" class="btn btn-danger" *ngIf="eraserRoullete==5">After you click here,
+                    its done, no turn
+                    back!</button><button (click)="deleteAccount()" class="btn btn-danger"
+                    *ngIf="eraserRoullete>=6">DELETE ACCOUNT</button>
+            </div>
+        </div>
+    </div>
 </div>
