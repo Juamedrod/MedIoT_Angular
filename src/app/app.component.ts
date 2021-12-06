@@ -7,7 +7,11 @@ import { AuthService } from './Services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   constructor(private authService: AuthService) {
+    /**
+     * Searh the token in the local Storage and set up the Active user
+     */
     this.authService.getToken();
   }
 }

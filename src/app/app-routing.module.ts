@@ -10,14 +10,16 @@ import { RegisterComponent } from './register/register.component';
 import { RealtimeComponent } from './asides/realtime/realtime.component';
 import { DevicesComponent } from './asides/devices/devices.component';
 import { HistoryComponent } from './asides/history/history.component';
+import { AuthGuard } from './Guards/auth.guard';
+import { NoAuthGuard } from './Guards/no-auth.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
   { path: 'aboutus', component: AboutUsComponent },
   {
-    path: 'dashboard', component: DashboardComponent, children: [
+    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
       { path: '', pathMatch: 'full', component: DevicesComponent },
       { path: 'blackboard', component: BlackboardComponent },
       { path: 'profile', component: ProfileComponent },
@@ -26,7 +28,7 @@ const routes: Routes = [
       { path: 'history', component: HistoryComponent },
     ]
   },
-  { path: '**', redirectTo: '/register' }
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

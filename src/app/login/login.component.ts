@@ -30,18 +30,17 @@ export class LoginComponent implements OnInit {
     try {
       const response = await this.authService.login(this.formulario.value)
       if (response == undefined || response.error) {
-        console.log(response);
+        console.log(response);///DELETE
         //message system to show the error
         return;
       }
       localStorage.setItem('authCredentials', response.token);
       this.authService.setToken(response.token);
-      //message system para avisar al usuario del login correcto
-      console.log('Exito!');
+      //message system para avisar al usuario del login correcto      
       this.router.navigate(['/dashboard']);
 
     } catch (error: any) {
-      console.log(error.error);
+      console.log(error.error);//sustituir este log por un mensaje del sistema de mensajes
     }
   }
 
