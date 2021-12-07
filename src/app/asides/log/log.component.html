@@ -1,0 +1,19 @@
+<div class="container">
+    <h2 class="text-center p-2">User Logs</h2>
+    <hr>
+    <div class="row" *ngFor="let log of logs">
+        <div class="col-md-4">
+            <p class=" text-muted">Date</p>
+            <p>{{ log.Date }}</p>
+        </div>
+        <div class="col-md-4">
+            <p class=" text-muted">Action</p>
+            <p>{{ log.action }}</p>
+        </div>
+        <div class="col-md-4">
+            <p class=" text-muted">Value</p>
+            <p>{{ log.value }}</p>
+        </div>
+        <hr noshade="noshade">
+    </div>
+</div>

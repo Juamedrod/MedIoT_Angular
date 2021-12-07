@@ -12,6 +12,7 @@ import { DevicesComponent } from './asides/devices/devices.component';
 import { HistoryComponent } from './asides/history/history.component';
 import { AuthGuard } from './Guards/auth.guard';
 import { NoAuthGuard } from './Guards/no-auth.guard';
+import { LogComponent } from './asides/log/log.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'realtime', component: RealtimeComponent },
       { path: 'devices', component: DevicesComponent },
       { path: 'history', component: HistoryComponent },
+      { path: 'log', component: LogComponent },
     ]
   },
   { path: '**', redirectTo: '/login' }

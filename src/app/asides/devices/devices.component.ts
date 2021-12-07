@@ -46,7 +46,6 @@ export class DevicesComponent implements OnInit {
       variables: variables
     }
     const newDevice = await this.devicesService.create(device);
-    console.log({ newDevice });//enviar a la api
     this.formulario.reset();
     this.clicked = false;
     this.idAvaliable = false;

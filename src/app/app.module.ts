@@ -20,6 +20,7 @@ import { RealtimeComponent } from './asides/realtime/realtime.component';
 import { HistoryComponent } from './asides/history/history.component';
 import { DevicesComponent } from './asides/devices/devices.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LogComponent } from './asides/log/log.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
     BooleanDisplayComponent,
     RealtimeComponent,
     HistoryComponent,
-    DevicesComponent
+    DevicesComponent,
+    LogComponent
   ],
   imports: [
     BrowserModule,
