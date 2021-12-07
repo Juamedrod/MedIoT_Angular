@@ -42,6 +42,14 @@ export class ProfileComponent implements OnInit {
     this.user = await this.authService.update(this.formulario.value);
   }
 
+  /**
+   * Logout function
+   */
+  logout() {
+    localStorage.removeItem('authCredentials');
+    this.router.navigate(['/login']);
+  }
+
   async deleteAccount() {
     try {
       await this.authService.remove(this.user);
@@ -70,6 +78,10 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /**
+   *  Update the info displayed in the card with the actual API data.
+   * @returns {void}
+   */
   async updateCard() {
     this.user = await this.authService.getUserAPI();
   }
@@ -82,11 +94,20 @@ export class ProfileComponent implements OnInit {
     this.eraserRoullete = index;
   }
 
+  /**
+   * This function check in the form for errors
+   * @param controlName Form control name for the input
+   * @param error Error name taht should be displayed if this validator fails
+   * @param touched True if you want the validator to run if the input is touched, false otherwise
+   * @returns true or false if there is error.
+   */
   checkError(controlName: string, error: string, touched: boolean): boolean | undefined {
     return touched ? this.formulario.get(controlName)?.hasError(error) && this.formulario.get(controlName)?.touched : this.formulario.get(controlName)?.hasError(error);
   }
 
-  //VALIDADORES
+  /**
+   *  Validators for the form
+   */
   dniValidator(control: AbstractControl) {
     let dni = control.value;
     let numero: number = parseInt(dni.substring(0, dni.length));

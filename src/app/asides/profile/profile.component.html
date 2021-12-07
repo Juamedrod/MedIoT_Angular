@@ -1,6 +1,7 @@
 <div class="container-fluid ">
     <div class="row text-center pt-3">
-        <h2>User Profile</h2>
+        <h2 class="col-11">User Profile</h2>
+        <p class="col-1 text-danger btn logout" (click)="logout()">LogOut <i class="fas fa-times"></i></p>
     </div>
     <div class="row text-center pt-2">
         <p class="mb-3 fst-italic">Welcome to your profile page, <strong>{{user.name}}</strong>.</p>

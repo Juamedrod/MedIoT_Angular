@@ -25,3 +25,10 @@ button{
 .error{
     color: tomato;
 }
+
+.logout:hover{
+    color: var(--optionColor1);
+    transition: 0.5s;
+    text-shadow: 1px 1px 1px var(--secondaryColor);
+    transform: scale(1.1); 
+}
