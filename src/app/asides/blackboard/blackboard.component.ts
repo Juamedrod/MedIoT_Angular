@@ -82,7 +82,6 @@ export class BlackboardComponent implements OnInit {
     };
 
     this.arrConfig[this.activeDisplay] = newDisplayConfig;
-    /* this.resetTemp(); */
     this.saved = true;
     await this.blackboardService.updateArrConfig(this.arrConfig);
   }

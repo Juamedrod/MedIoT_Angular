@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { RealtimeService } from 'src/app/Services/realtime.service';
 import { DisplayConfig, displayType } from '../../Interfaces/DisplayConfig.interface';
 import { ChartService } from '../../Services/chart.service';
 
@@ -12,9 +13,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
   @ViewChild('myChart') myChart!: ElementRef;
   chart: any;
   interval: any;
+  errors: { error: boolean, msg: string };
 
-
-  constructor(private chartService: ChartService) {
+  constructor(private chartService: ChartService, private realtimeService: RealtimeService) {
+    this.errors = { error: false, msg: '' };
     this.displayConfig = {
       displayType: displayType.LineChart,
       maxDataRepresentation: 10, //max number of inputs to display
@@ -31,8 +33,11 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    /**
+     * Initialize the chart
+     */
     switch (this.displayConfig.displayType) {
-      case (displayType.LineChart):
+      case (displayType.LineChart)://LINE
         this.chart = this.chartService.lineChart(this.myChart, {
           variableName: this.displayConfig.variableName,
           color: this.displayConfig.color,
@@ -42,18 +47,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
           chartName: this.displayConfig.chartName
         })
 
-        this.interval = setInterval(() => {
-          if (this.chart.data.labels.length >= this.displayConfig.maxDataRepresentation) {
-            this.chartService.removeData(this.chart);
-            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call using variableId           
-          } else {
-            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call using variableId
-          }
-        }, this.displayConfig.refreshInterval);
-
+        this.startInterval();
         break;
 
-      case (displayType.BarChart):
+      case (displayType.BarChart)://BAR CHART
         this.chart = this.chartService.barChart(this.myChart, {
           variableName: this.displayConfig.variableName,
           color: this.displayConfig.color,
@@ -61,18 +58,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
           borderWidth: this.displayConfig.borderWidth!
         });
 
-        this.interval = setInterval(() => {
-          if (this.chart.data.labels.length >= this.displayConfig.maxDataRepresentation) {
-            this.chartService.removeData(this.chart);
-            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call  using variableId          
-          } else {
-            this.chartService.addData(this.chart, Math.trunc(Math.random() * 90), Math.trunc(Math.random() * 90));//Api call using variableId
-          }
-        }, this.displayConfig.refreshInterval);
-
+        this.startInterval();
         break;
 
-      case (displayType.PieChart):
+      case (displayType.PieChart)://PIE
         this.chart = this.chartService.pieChart(this.myChart, {
           variableName: this.displayConfig.variableName,
           colors: this.displayConfig.colors!,
@@ -82,7 +71,32 @@ export class ChartComponent implements OnInit, AfterViewInit {
         this.chart.data.datasets[0].data = [50, 25, 25];
         this.chart.update();
         break;
-
     }
+  }
+
+  startInterval() {
+    this.interval = setInterval(() => {
+      const varValue = this.realtimeService.getVariable(this.displayConfig.dId!, this.displayConfig.variableId);
+      if (isNaN(varValue)) {
+        this.errors.error = true;
+        this.errors.msg = varValue;
+        return;
+      }
+      this.errors.error = false;
+      if (this.chart.data.labels.length >= this.displayConfig.maxDataRepresentation) {
+        this.chartService.removeData(this.chart);
+        this.chartService.addData(this.chart, new Date().toLocaleString(), varValue);//Api call  using variableId          
+      } else {
+        this.chartService.addData(this.chart, new Date().toLocaleString(), varValue);//Api call using variableId
+      }
+    }, this.displayConfig.refreshInterval);
+  }
+
+  stopInterval() {
+    window.clearInterval(this.interval);
+  }
+
+  ngOnDestroy() {
+    window.clearInterval(this.interval);
   }
 }

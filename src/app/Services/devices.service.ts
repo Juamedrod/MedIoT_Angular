@@ -7,12 +7,12 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class DevicesService {
-  devices: Device[];
+
   baseURL: string;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {
     this.baseURL = "http://192.168.1.39:3000/api/devices";
-    this.devices = [];
+
   }
 
   /**

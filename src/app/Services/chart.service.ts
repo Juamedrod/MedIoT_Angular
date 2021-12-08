@@ -10,7 +10,10 @@ export class ChartService {
   constructor() { }
 
   /**
-   * LINE CHART INSTANTIATION 
+   * Function generator of a Line Chart
+   * @param chart Reference to the canvas element in the html.
+   * @param config Its a lineChartConfig interfaced object with all the data needed to configure a Line Chart 
+   * @returns The chart itself reference to be set on the canvas.
    */
   lineChart(chart: ElementRef, config: lineChartConfig): Chart {
     return new Chart(chart.nativeElement, {
@@ -30,7 +33,7 @@ export class ChartService {
         scales: {
           y: {
             beginAtZero: true,
-            max: 100
+            //max: 100
           }
         },
         responsive: true,
@@ -48,7 +51,10 @@ export class ChartService {
   }
 
   /**
-   * BAR CHART INSTANTIATION 
+   * Function generator of a Bar Chart
+   * @param chart Reference to the canvas element in the html.
+   * @param config Its a barChartConfig interfaced object with all the data needed to configure a Bar Chart 
+   * @returns The chart itself reference to be set on the canvas.
    */
   barChart(chart: ElementRef, config: barChartConfig): Chart {
     return new Chart(chart.nativeElement, {
@@ -73,6 +79,12 @@ export class ChartService {
     });
   }
 
+  /**
+   * Function generator of a Pie Chart
+   * @param chart Reference to the canvas element in the html.
+   * @param config Its a pieChartConfig interfaced object with all the data needed to configure a pie chart 
+   * @returns The chart itself reference to be set on the canvas.
+   */
   pieChart(chart: ElementRef, config: pieChartConfig): Chart {
     return new Chart(chart.nativeElement, {
       type: 'pie',
@@ -88,6 +100,12 @@ export class ChartService {
     });
   }
 
+  /**
+   * Function to add a new value to the chart
+   * @param chart Chart instance reference
+   * @param label the label for this data value
+   * @param data the value itself of the variable
+   */
   addData(chart: Chart, label: any, data: any) {
     chart.data.labels!.push(label);
     chart.data.datasets.forEach((dataset) => {
@@ -96,6 +114,11 @@ export class ChartService {
     chart.update();
   }
 
+  /**
+   * Function to remove the first value and label.
+   * FIFO remove style, first in, first out.
+   * @param chart Chart instance reference
+   */
   removeData(chart: Chart) {
     chart.data.labels!.shift();
     chart.data.datasets.forEach((dataset) => {

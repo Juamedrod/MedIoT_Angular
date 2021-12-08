@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DisplayConfig, displayType } from 'src/app/Interfaces/DisplayConfig.interface';
+import { RealtimeService } from 'src/app/Services/realtime.service';
 
 @Component({
   selector: 'boolean-display',
@@ -9,8 +10,9 @@ import { DisplayConfig, displayType } from 'src/app/Interfaces/DisplayConfig.int
 export class BooleanDisplayComponent implements OnInit {
   variableState: boolean;
   @Input() displayConfig: DisplayConfig;
+  interval: any;
 
-  constructor() {
+  constructor(private realtimeService: RealtimeService) {
     this.displayConfig = {
       displayType: displayType.BooleanDisplay,
       maxDataRepresentation: 10, //max number of inputs to display
@@ -29,9 +31,12 @@ export class BooleanDisplayComponent implements OnInit {
   }
 
   updateState() {
-    setInterval(() => {
-      //api call to check state
-      this.variableState = !this.variableState;
+    this.interval = setInterval(() => {
+      this.variableState = this.realtimeService.getVariable(this.displayConfig.dId!, this.displayConfig.variableId);
     }, this.displayConfig.refreshInterval);
+  }
+
+  ngOnDestroy() {
+    window.clearInterval(this.interval);
   }
 }

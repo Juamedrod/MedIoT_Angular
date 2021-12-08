@@ -15,16 +15,28 @@ export class BlackboardService {
     this.baseURL = "http://192.168.1.39:3000/api/blackboard";
   }
 
+  /**
+   * Function to update changes on actual DisplayConfigs already present in the blackboard
+   * @param arrConfig Array with the changes made to the ArrConfig
+   * @returns Updated DisplayConfig
+   */
   updateArrConfig(arrConfig: DisplayConfig[]) {
     return this.httpClient.put<any>(this.baseURL, arrConfig, this.authService.getAuthHeaders()).toPromise();
-    //This function have to save this config array in the database
   }
 
+  /**
+    * Function to save a new ArrConfig on db.
+    * @param arrConfig ArrConfig to save on db
+    * @returns created arrConfig
+    */
   storeArrConfig(arrConfig: DisplayConfig[]) {
     return this.httpClient.post<any>(this.baseURL, arrConfig, this.authService.getAuthHeaders()).toPromise();
-    //This function have to save this config array in the database
   }
 
+  /**
+   * Function to recover the arrConfig present on db for display.
+   * @returns the arrConfig present on db for this user
+   */
   getArrConfig(): Promise<any> {
     return this.httpClient.get<any>(this.baseURL, this.authService.getAuthHeaders()).toPromise();
   }

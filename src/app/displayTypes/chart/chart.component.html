@@ -1,3 +1,10 @@
-<div class=>
+<div class="d-flex flex-column justify-content-center align-items-center align-content-center">
     <canvas #myChart></canvas>
+    <div *ngIf="errors.error" class="d-flex justify-content-center align-content-center align-items-center p-2">
+        <div class="spinner-border text-danger"></div>
+        <div class="text-center text-uppercase text-danger p-2">
+            <p class="m-0">{{errors.msg}}</p>
+        </div>
+        <div class="spinner-border text-danger"></div>
+    </div>
 </div>
