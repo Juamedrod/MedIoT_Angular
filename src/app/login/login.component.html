@@ -1,13 +1,14 @@
 <div class="container col-xl-10 col-xxl-8 px-4 py-2 py-md-5">
     <div class="row align-items-center g-lg-5 py-3 py-md-5">
-        <div class="col-lg-7 text-center text-lg-start">
+        <div class="col-lg-6 text-center text-lg-start">
             <h1 class="display-4 fw-bold lh-1 mb-3 subtext">MedIoT</h1>
             <p class="col-lg-10 fs-4">Bienvenido a <strong>MedIoT</strong>, tu aplicacion IoT con la que llevarás el
                 poder de tus dispositivos a otro nivel.
                 Compatible con cualquier dispositivo con conectividad WiFi. </p>
             <p class="subtext">Conecta tu mundo, con el mundo.</p>
         </div>
-        <div class="col-md-10 mx-auto col-lg-5">
+        <div class="col-md-10 mx-auto col-lg-6">
+            <h2 class="text-center">Login</h2>
             <form class="p-4 p-md-5 border rounded-3 " [formGroup]="formulario" (ngSubmit)="onsubmit()">
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control" formControlName="email">

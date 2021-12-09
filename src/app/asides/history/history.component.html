@@ -1,1 +1,64 @@
-<p>history works!</p>
+<div class="container-fluid">
+    <div class=" pt-3 ">
+        <h2>Historical Data</h2>
+        <hr>
+        <section class="row">
+            <div class="col-3">
+                <div class="my-4  w-100">
+                    <select class="form-select" (change)="onSelectChange()" [(ngModel)]="selectedDevice">
+                        <option value="">Select Device</option>
+                        <option [value]="device.dId" *ngFor="let device of devices; let index=index">{{device.nickname}}
+                        </option>
+                    </select>
+                </div>
+                <div class="my-4 w-100 ">
+                    <select class="form-select " [ngClass]="{'opacity-50':!mainSelectClicked}"
+                        [disabled]="!mainSelectClicked" [(ngModel)]="selectedVar">
+                        <option value="">Select Variable</option>
+                        <option [value]="variable" *ngFor="let variable of variables">{{variable}}</option>
+                    </select>
+                </div>
+                <div class="my-4 w-100 ">
+                    <label for="numberDisplay" class=" w-100">Number of datas: {{numberOfDatas}}</label>
+                    <input type="range" class="w-100" min="1" max="50" id="numberDisplay" (change)="findData()"
+                        [(ngModel)]="numberOfDatas">
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="form-check form-switch ">
+                    <div class="d-flex justify-content-end">
+                        <input class="form-check-input " type="checkbox" role="switch" [(ngModel)]="visualizationToggle"
+                            id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">{{visualizationToggle?
+                            'Graphic':'Table'}}</label>
+                    </div>
+                </div>
+                <div class="dataDisplay">
+                    <div class="tables" *ngIf="!visualizationToggle">
+                        <table class="table table-hover table-light">
+                            <thead>
+                                <tr>
+                                    <th scope="col">DiD</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Variable</th>
+                                    <th scope="col">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of datas">
+                                    <td>{{data.dId}}</td>
+                                    <td>{{data.iat | date}}</td>
+                                    <td>{{selectedVar}}</td>
+                                    <td>{{data.variables[selectedVar]}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="graph" [ngClass]="{'d-none':!visualizationToggle}">
+                        <canvas #graph></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

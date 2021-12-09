@@ -31,3 +31,7 @@ label{
 small{
     text-shadow: 1px 1px 1px lightgrey;
 }
+
+h2{
+    color: var(--secondaryColor);
+}

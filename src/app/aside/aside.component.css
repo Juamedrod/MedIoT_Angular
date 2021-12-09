@@ -1,6 +1,5 @@
 .wrapper{
-    /* background-color: var(--secondaryColor); */
-    background: linear-gradient(0deg,#389466,#42b883);;
+    background-color: var(--optionColor1);    
     border-radius: 10px;
     margin-top: 20px;
     height: 75vh;
@@ -16,16 +15,22 @@ a{
     font-weight: 300;
     text-decoration: none;
     color: white;
+    transition: 0.5s;
 }
 
 i{
     cursor: pointer;
     font-size:150%;
     padding: 5px 0;
-    transition: 2s;
+    transition: 0.5s;
 }
 
-i:hover, a:hover{
-    color: var(--optionColor1);
+.myLink{
+    font-size: 120%;
+    cursor: pointer;
+}
+
+.myLink:hover i, .myLink:hover a{
+    color: var(--secondaryColor);
     transition: 0.5s;
 }

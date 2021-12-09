@@ -125,4 +125,15 @@ export class ChartService {
       dataset.data.shift();
     });
   }
+
+  /**
+   * Reset the actual data for this chart
+   * @param chart Chart instance reference
+   */
+  resetChart(chart: Chart) {
+    chart.data.labels = [];
+    chart.data.datasets.forEach((dataset) => {
+      dataset.data = [];
+    });
+  }
 }

@@ -6,20 +6,23 @@ i{
     cursor: pointer;
     font-size: 140%;
     color: var(--secondaryColor);
+    transition: 0.5s;
 }
 
 a{
     color: var(--secondaryColor);
     font-family: var(--mainFont);
     font-weight: 400;
-    transition: 2s;
+    transition: 0.5s;
 }
 
-i:hover, a:hover{
-    color: var(--optionColor1);
-    transition: 0.5s;
-    text-shadow: 1px 1px 1px var(--secondaryColor);
-    transform: scale(1.1);
-    
+.myLink{
+    cursor: pointer;
+    font-size: 140%;
+}
+
+.myLink:hover i, .myLink:hover a{
+    color: white;
+    transition: 0.5s;          
 }
 
