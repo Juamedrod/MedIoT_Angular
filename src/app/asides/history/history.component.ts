@@ -58,6 +58,13 @@ export class HistoryComponent implements OnInit {
   }
 
   onSelectChange1() {
+    if (this.selectedDevice == '') {
+      this.datas = [];
+      this.selectedVar = '';
+      this.mainSelectClicked = false;
+      return;
+    }
+    this.selectedVar = '';
     this.mainSelectClicked = true;
     this.setVariables(this.selectedDevice);
     this.datas = [];

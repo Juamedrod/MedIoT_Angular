@@ -24,3 +24,12 @@ label{
 .border{
     border: 1px solid white;
 }
+
+.btn-info{
+    background-color: var(--optionColor1);
+    color: white;
+}
+
+.btn-primary{
+    background-color: var(--secondaryColor);
+}
