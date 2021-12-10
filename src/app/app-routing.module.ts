@@ -13,6 +13,7 @@ import { HistoryComponent } from './asides/history/history.component';
 import { AuthGuard } from './Guards/auth.guard';
 import { NoAuthGuard } from './Guards/no-auth.guard';
 import { LogComponent } from './asides/log/log.component';
+import { DetailingComponent } from './asides/detailing/detailing.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'devices', component: DevicesComponent },
       { path: 'history', component: HistoryComponent },
       { path: 'log', component: LogComponent },
+      { path: 'detailing', component: DetailingComponent }
     ]
   },
   { path: '**', redirectTo: '/login' }

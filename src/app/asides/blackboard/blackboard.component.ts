@@ -93,8 +93,8 @@ export class BlackboardComponent implements OnInit {
     try {
       const device = this.devices.find(device => device.dId == dId);
       this.varsOfThisDevice = device!.variables;
-    } catch (error) {
-      console.log({ error });
+    } catch (error: any) {
+      console.log({ error: error.message });
     }
   }
 
@@ -165,6 +165,7 @@ export class BlackboardComponent implements OnInit {
    *  Remove the display from the list
    */
   async removeDisplay(index: number) {
+    confirm('¿Borrar dispositivo?');
     this.arrConfig.splice(index, 1);
     const response = await this.blackboardService.updateArrConfig(this.arrConfig);
   }

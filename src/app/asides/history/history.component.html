@@ -5,7 +5,7 @@
         <section class="row">
             <div class="col-3">
                 <div class="my-4  w-100">
-                    <select class="form-select" (change)="onSelectChange()" [(ngModel)]="selectedDevice">
+                    <select class="form-select" (change)="onSelectChange1()" [(ngModel)]="selectedDevice">
                         <option value="">Select Device</option>
                         <option [value]="device.dId" *ngFor="let device of devices; let index=index">{{device.nickname}}
                         </option>
@@ -13,23 +13,43 @@
                 </div>
                 <div class="my-4 w-100 ">
                     <select class="form-select " [ngClass]="{'opacity-50':!mainSelectClicked}"
-                        [disabled]="!mainSelectClicked" [(ngModel)]="selectedVar">
+                        [disabled]="!mainSelectClicked" [(ngModel)]="selectedVar" (change)="onSelectChange2()">
                         <option value="">Select Variable</option>
                         <option [value]="variable" *ngFor="let variable of variables">{{variable}}</option>
                     </select>
                 </div>
-                <div class="my-4 w-100 ">
+                <div class="my-4 w-100 " [ngClass]="{'opacity-50':!selectedVar}">
                     <label for="numberDisplay" class=" w-100">Number of datas: {{numberOfDatas}}</label>
                     <input type="range" class="w-100" min="1" max="50" id="numberDisplay" (change)="findData()"
-                        [(ngModel)]="numberOfDatas">
+                        [(ngModel)]="numberOfDatas" [disabled]="!selectedVar">
+                </div>
+                <div class="my-4 w-100 ">
+                    <label for="curvatureTension" class=" w-100">Curvature tension: {{curvatureTension}}</label>
+                    <input type="range" class="w-100" step="0.1" min="0" max="1" id="curvatureTension"
+                        (change)="onTensionChange()" [(ngModel)]="curvatureTension">
+                </div>
+                <div class="my-4 w-100 ">
+                    <label for="borderWidth" class=" w-100">Line border width: {{lineBorderWidth}}</label>
+                    <input type="range" class="w-100" step="0.5" min="0" max="10" id="borderWidth"
+                        (change)="onBorderWidthChange()" [(ngModel)]="lineBorderWidth">
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input w-25" type="checkbox" role="switch" id="SwitchFill" checked #fill
+                        (change)="onchangeFill($event)">
+                    <label class="form-check-label ps-2" for="SwitchFill">Fill the area?</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input w-25" type="checkbox" role="switch" id="switchAnimations" checked
+                        #fill (change)="onchangeAniamtion($event)">
+                    <label class="form-check-label ps-2" for="switchAnimations">Animations</label>
                 </div>
             </div>
             <div class="col-9">
                 <div class="form-check form-switch ">
                     <div class="d-flex justify-content-end">
-                        <input class="form-check-input " type="checkbox" role="switch" [(ngModel)]="visualizationToggle"
-                            id="flexSwitchCheckChecked">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">{{visualizationToggle?
+                        <input class="form-check-input myuniqueinput" type="checkbox" role="switch"
+                            [(ngModel)]="visualizationToggle" id="switchVisualizaation">
+                        <label class="form-check-label" for="switchVisualizaation">{{visualizationToggle?
                             'Graphic':'Table'}}</label>
                     </div>
                 </div>
@@ -38,10 +58,10 @@
                         <table class="table table-hover table-light">
                             <thead>
                                 <tr>
-                                    <th scope="col">DiD</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Variable</th>
-                                    <th scope="col">Value</th>
+                                    <th scope="col" class="text-black-50">DiD</th>
+                                    <th scope="col" class="text-black-50">Date</th>
+                                    <th scope="col" class="text-black-50">Variable</th>
+                                    <th scope="col" class="text-black-50">Value</th>
                                 </tr>
                             </thead>
                             <tbody>

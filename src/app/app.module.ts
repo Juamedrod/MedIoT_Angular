@@ -21,6 +21,7 @@ import { HistoryComponent } from './asides/history/history.component';
 import { DevicesComponent } from './asides/devices/devices.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LogComponent } from './asides/log/log.component';
+import { DetailingComponent } from './asides/detailing/detailing.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { LogComponent } from './asides/log/log.component';
     RealtimeComponent,
     HistoryComponent,
     DevicesComponent,
-    LogComponent
+    LogComponent,
+    DetailingComponent
   ],
   imports: [
     BrowserModule,

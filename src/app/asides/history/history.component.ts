@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { lineChartConfig } from 'src/app/Interfaces/chartDatasets.interfaces';
@@ -23,10 +24,14 @@ export class HistoryComponent implements OnInit {
   selectedVar: string;
   selectedDevice: string;
   lineChartconfig: lineChartConfig;
+  curvatureTension: string;
+  lineBorderWidth: number;
   chartRef: any;
 
   constructor(private deviceService: DevicesService, private historicService: HistoricService, private chartService: ChartService) {
     this.selectedDevice = '';
+    this.lineBorderWidth = 3;
+    this.curvatureTension = '';
     this.selectedVar = '';
     this.numberOfDatas = 1;
     this.visualizationToggle = false;
@@ -37,7 +42,7 @@ export class HistoryComponent implements OnInit {
     this.lineChartconfig = {
       chartName: this.selectedDevice,
       variableName: this.selectedVar,
-      color: '#8d1d55',
+      color: '#9e1f5e',
       backgroundColorRGBA: '#42b883',
       fillArea: true,
       tension: 0.5
@@ -52,9 +57,35 @@ export class HistoryComponent implements OnInit {
     this.chartRef = this.chartService.lineChart(this.chart, this.lineChartconfig);
   }
 
-  onSelectChange() {
+  onSelectChange1() {
     this.mainSelectClicked = true;
     this.setVariables(this.selectedDevice);
+    this.datas = [];
+  }
+
+  onSelectChange2() {
+    this.datas = [];
+    this.findData();
+  }
+
+  onchangeFill($event: any) {
+    this.chartRef.data.datasets[0].fill = $event.target.checked
+    this.chartRef.update();
+  }
+
+  onchangeAniamtion($event: any) {
+    this.chartRef.options.animation = $event.target.checked
+    this.chartRef.update();
+  }
+
+  onTensionChange() {
+    this.chartRef.data.datasets[0].tension = parseFloat(this.curvatureTension);
+    this.chartRef.update();
+  }
+
+  onBorderWidthChange() {
+    this.chartRef.data.datasets[0].borderWidth = this.lineBorderWidth;
+    this.chartRef.update();
   }
 
   /**
@@ -64,7 +95,7 @@ export class HistoryComponent implements OnInit {
     this.datas = await this.historicService.getData(this.selectedDevice, this.numberOfDatas.toString());
     this.chartService.resetChart(this.chartRef);
     for (const data of this.datas) {
-      this.chartService.addData(this.chartRef, data.iat, data.variables[this.selectedVar]);
+      this.chartService.addData(this.chartRef, formatDate(data.iat, 'M/d/yy, h:mm:ss', 'en_US'), data.variables[this.selectedVar]);
     }
   }
 

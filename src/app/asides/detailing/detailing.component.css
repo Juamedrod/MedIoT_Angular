@@ -1,0 +1,19 @@
+.imgportrait{
+    width: 80%;
+    height:300px;    
+    background-size: cover;
+    background-position: center center;
+}
+
+div section div p{
+    font-family: var(--font4);
+    font-weight: 300;
+}
+
+.btn-danger{
+    background-color:var(--optionColor1);
+}
+
+.btn-primary{
+    background-color: var(--secondaryColor);
+}

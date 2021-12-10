@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <section class="row">
+        <div class="col-4">
+            <div class="pt-4">
+                <select class="form-select" (change)="onSelectChange1($event)">
+                    <option selected>Select Device</option>
+                    <option [value]="index" *ngFor="let device of devices; let index=index">{{device.nickname}}
+                    </option>
+                </select>
+            </div>
+            <div *ngIf="selectedDevice!=undefined">
+                <h2 class="text-center text-muted text-uppercase p-2">{{selectedDevice.deviceType}}</h2>
+                <p class="text-center text-success"> Device Unique Identifier(dId): {{selectedDevice.dId}}</p>
+                <div class="imgportrait"
+                    [ngStyle]="{'backgroundImage': 'url(/assets/images/'+selectedDevice.deviceType+'.png)'}">
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-center">{{selectedDevice.description}}</p>
+                </div>
+                <p class="text-center text-muted">Variables</p>
+                <ul class="list-group-flush bg-transparent list-group-numbered text-white">
+                    <li class="list-group-item bg-transparent text-white-50 text-start"
+                        *ngFor="let variable of selectedDevice.variables; let index=index">
+                        <input type="text" class="form-control" [(ngModel)]="selectedDevice.variables[index]">
+                    </li>
+                </ul>
+                <div
+                    class="text-center d-flex flex-column flex-md-row justify-content-center align-content-center align-items-center">
+                    <button class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal">DELETE
+                        DEVICE</button>
+                    <button class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#updateModal">UPDATE
+                        DEVICE</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-8 p-5">
+            <p class="p-2" *ngFor="let description of completeDescription ">{{description}}</p>
+        </div>
+    </section>
+
+    <!-- MODALS -->
+
+    <!-- Modal delete device -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-muted" id="exampleModalLabel">Delete Device</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-black-50">
+                    <p>Confirm that you want to delete this device.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteDevice()">Delete
+                        Device</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal update device-->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-muted" id="exampleModalLabel">Delete Device</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-black-50">
+                    <p>Confirm that you want to delete this device.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="updateDevice()">Update Device</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
