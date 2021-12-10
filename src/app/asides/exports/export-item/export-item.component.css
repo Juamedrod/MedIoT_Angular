@@ -1,0 +1,22 @@
+.card{
+    background-color: var(--optionColor1);
+    border: 2px solid var(--secondaryColor);
+}
+
+i{
+    font-size: 500%;
+}
+
+.btn-primary{
+    background-color: var(--secondaryColor);
+    text-shadow: 1px 1px 1px black;
+}
+
+.secondaryColor{
+    color: var(--secondaryColor);
+    text-shadow: 1px 1px 1px black;
+}
+
+.description{
+    min-height: 100px;
+}

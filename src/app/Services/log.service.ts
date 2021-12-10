@@ -9,10 +9,14 @@ export class LogService {
   baseUrl: string;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {
-    this.baseUrl = 'http://192.168.1.39:3000/api/logs';
+    this.baseUrl = 'http://192.168.1.39:3000/api/';
   }
 
   public getLogs(): Promise<string> {
-    return this.httpClient.get<string>(this.baseUrl, this.authService.getAuthHeaders()).toPromise();
+    return this.httpClient.get<string>(this.baseUrl + 'logs', this.authService.getAuthHeaders()).toPromise();
+  }
+
+  public downloadCSV(dId: string, variable?: string) {
+    return this.httpClient.get<any>(this.baseUrl + 'exports/' + dId + '/' + variable, this.authService.getAuthHeaders()).toPromise();
   }
 }

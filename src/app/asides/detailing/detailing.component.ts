@@ -23,6 +23,11 @@ export class DetailingComponent implements OnInit {
   }
 
   onSelectChange1($event: any) {
+    if ($event.target.value === '') {
+      this.completeDescription = [];
+      this.selectedDevice = undefined;
+      return;
+    }
     this.selectedDevice = this.devices[$event.target.value];
     switch (this.selectedDevice.deviceType) {
       case 'esp32':
@@ -35,6 +40,7 @@ export class DetailingComponent implements OnInit {
         this.completeDescription = ARDUINO;
         break;
       default:
+        this.completeDescription = [];
         break;
     }
   }

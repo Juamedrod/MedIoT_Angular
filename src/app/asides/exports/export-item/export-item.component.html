@@ -1,0 +1,16 @@
+<article class="card text-center p-2">
+    <div><i class="fas fa-file-csv"></i></div>
+    <hr>
+    <div class="card-body">
+        <h5 class="card-title secondaryColor">Device: {{device.nickname}}</h5>
+        <hr>
+        <p class="card-text description">{{device.description}}.</p>
+        <select class="form-select my-2" [(ngModel)]="selectExport" aria-label="exportSelect">
+            <option value=''>Select an export option</option>
+            <option value="variables">All variables</option>
+            <option [value]="variable" *ngFor="let variable of device.variables">{{variable}}</option>
+        </select>
+        <button (click)="downloadSCV(device.dId)" class="btn btn-primary"
+            [disabled]="selectExport===''">Download</button>
+    </div>
+</article>
