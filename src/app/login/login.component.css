@@ -11,27 +11,36 @@
 }
 
 .ng-touched.ng-valid:not(form){
-    border: 2px solid lightgreen;
+    border: 2px solid green;
 }
 
 form{
-    background-image: url('/assets/images/leathered_blue_full.png');
+    /* background-image: url('/assets/images/leathered_blue_full.png');
     background-repeat: no-repeat;
-    background-size: cover;
-    background-color: rgb(93, 86, 199);
-    background-blend-mode: multiply;
-    border-radius: 10px;    
-    box-shadow: 1px 1px 3px lightgrey;
+    background-size: cover;    
+    background-blend-mode:overlay; */
+    background-color: var(--optionColor1);
+    border-radius: 10px;
+    border:2px solid var(--secondaryColor);    
+    box-shadow: 0px 0px 6px var(--secondaryColor);
+    font-family: var(--ternaryFont);
+    font-weight: 500;
 }
 
 label{
     color:var(--mainColor)
 }
 
-small{
-    text-shadow: 1px 1px 1px lightgrey;
-}
-
 h2{
     color: var(--secondaryColor);
 }
+
+.btnsubmit{
+    background-color: var(--secondaryColor);
+}
+
+p{
+    font-family: var(--ternaryFont);
+    font-weight: 500;
+}
+

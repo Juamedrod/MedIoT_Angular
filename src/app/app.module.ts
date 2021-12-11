@@ -25,6 +25,8 @@ import { DetailingComponent } from './asides/detailing/detailing.component';
 import { ExportsComponent } from './asides/exports/exports.component';
 import { ExportItemComponent } from './asides/exports/export-item/export-item.component';
 import { DevicesDocComponent } from './asides/devices-doc/devices-doc.component';
+import { MessagesSystemComponent } from './messages-system/messages-system.component';
+import { ChatComponent } from './asides/chat/chat.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { DevicesDocComponent } from './asides/devices-doc/devices-doc.component'
     DetailingComponent,
     ExportsComponent,
     ExportItemComponent,
-    DevicesDocComponent
+    DevicesDocComponent,
+    MessagesSystemComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@
             <form [formGroup]="formulario" (ngSubmit)="onSubmit()" novalidate>
                 <div class="mb-3">
                     <label class="form-label">Name</label>
-                    <input type="text" class="form-control" formControlName="name">
+                    <input type="text" class="form-control border-1" formControlName="name">
                     <p class="error" *ngIf="checkError('name', 'required',true)">
                         El campo es requerido
                     </p>
@@ -14,8 +14,8 @@
                     </p>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">surname</label>
-                    <input type="text" class="form-control" formControlName="surname">
+                    <label class="form-label">Surname</label>
+                    <input type="text" class="form-control border-1" formControlName="surname">
                     <p class="error" *ngIf="checkError('surname', 'required',true)">
                         El campo es requerido
                     </p>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" formControlName="email">
+                    <input type="email" class="form-control border-1" formControlName="email">
                     <p class="error" *ngIf="checkError('email', 'required',true)">
                         El campo es requerido.
                     </p>
@@ -35,21 +35,22 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Dni</label>
-                    <input type="text" class="form-control" formControlName="dni">
+                    <input type="text" class="form-control border-1" formControlName="dni">
                     <p class="error" *ngIf="checkError('dni', 'dnivalidator',true)">
                         DNI incorrecto.
                     </p>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" formControlName="password" autocomplete="new-password">
+                    <input type="password" class="form-control border-1" formControlName="password"
+                        autocomplete="new-password">
                     <p class="error" *ngIf="checkError('password', 'required',true)">
                         El campo es requerido
                     </p>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Repite Password</label>
-                    <input type="password" class="form-control" formControlName="repite_password"
+                    <input type="password" class="form-control border-1" formControlName="repite_password"
                         autocomplete="new-password">
                     <p class="error" *ngIf="checkError('repite_password', 'required',true)">
                         El campo es requerido
@@ -60,7 +61,7 @@
                 </div>
                 <div class="mb-2">
                     <input type="checkbox" class="form-check-input" formControlName="agreements">
-                    <label class="form-label ps-2">Acepto los terminos y condiciones.</label>
+                    <label class="form-label ps-2 text-white">Acepto los terminos y condiciones.</label>
                 </div>
 
                 <input type="submit" value="SEND" class="btn w-50 mt-2 btnform"

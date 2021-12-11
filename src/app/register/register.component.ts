@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { msgType } from '../Interfaces/message.interface';
 import { AuthService } from '../Services/auth.service';
+import { MessagesSystemService } from '../Services/messages-system.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   formulario: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private messageService: MessagesSystemService) {
     this.formulario = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       surname: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -42,12 +44,12 @@ export class RegisterComponent implements OnInit {
     const response = await this.authService.register(this.formulario.value);
     if (response == undefined || response.error) {
       console.log(response);
-      //message system to show the error
+      this.messageService.newMessage({ message: 'An error has ocurred, try again!', messageType: msgType.error });
       return;
     }
     localStorage.setItem('authCredentials', response.token);
     this.authService.setToken(response.token);
-    //message system para avisar al usuario del login correcto
+    this.messageService.newMessage({ message: 'Register success!', messageType: msgType.success });
     this.router.navigate(['/dashboard']);
   }
 

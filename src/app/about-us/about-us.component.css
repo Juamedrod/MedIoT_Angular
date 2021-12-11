@@ -1,0 +1,21 @@
+h3{
+    color: var(--optionColor1);
+    font-family: var(--ternaryFont);
+}
+
+h2{
+    color: var(--secondaryColor);
+}
+
+p{
+    font-family: var(--font4);
+}
+
+.logo{
+    background-image: url(src\assets\images\logo2.png);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 105px;
+}

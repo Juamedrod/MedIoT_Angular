@@ -16,6 +16,7 @@ import { LogComponent } from './asides/log/log.component';
 import { DetailingComponent } from './asides/detailing/detailing.component';
 import { ExportsComponent } from './asides/exports/exports.component';
 import { DevicesDocComponent } from './asides/devices-doc/devices-doc.component';
+import { ChatComponent } from './asides/chat/chat.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -33,7 +34,8 @@ const routes: Routes = [
       { path: 'log', component: LogComponent },
       { path: 'detailing', component: DetailingComponent },
       { path: 'exports', component: ExportsComponent },
-      { path: 'devdoc', component: DevicesDocComponent }
+      { path: 'devdoc', component: DevicesDocComponent },
+      { path: 'chat', component: ChatComponent }
     ]
   },
   { path: '**', redirectTo: '/login' }

@@ -1,10 +1,16 @@
 .wrapper{
-    background-image: url('/assets/images/leathered_blue_full.png');
+    /* background-image: url('/assets/images/leathered_blue_full.png');
     background-size: cover;
     background-color: rgb(122, 116, 212);;
     background-blend-mode: multiply;
     border-radius: 10px;    
-    box-shadow: 1px 1px 3px lightgrey;
+    box-shadow: 1px 1px 3px lightgrey; */
+    background-color: var(--optionColor1);
+    border-radius: 10px;
+    border:2px solid var(--secondaryColor);    
+    box-shadow: 0px 0px 6px var(--secondaryColor);
+    font-family: var(--ternaryFont);
+    font-weight: 500;
 }
 
 .ng-touched.ng-invalid:not(form){
@@ -36,12 +42,8 @@ h2{
 }
 
 label{
-    color: var(--secondaryColor);
-    text-shadow: 1px 1px 1px white;
-    font-family: var(--ternaryFont);
-    font-weight: 400;
+    color: var(--secondaryColor);    
+    font-family: var(--font4);
+    font-weight: 500;
 }
 
-label:last-child{
-    color: lightgrey;
-}

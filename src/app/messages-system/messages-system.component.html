@@ -1,0 +1,22 @@
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+    <!-- Position it: -->
+    <!-- - `.toast-container` for spacing between toasts -->
+    <!-- - `.position-absolute`, `top-0` & `end-0` to position the toasts in the upper right corner -->
+    <!-- - `.p-3` to prevent the toasts from sticking to the edge of the container  -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+
+        <!-- Then put toasts within -->
+        <div class="toast show " autohide="true" role="alert" *ngFor="let message of arrMessages">
+            <div class="toast-header " [ngClass]="{'bg-success': message.messageType==1,'bg-danger': message.messageType==0,
+            'bg-primary': message.messageType==2}">
+                <strong class="me-auto text-white">MedIoT Message</strong>
+                <small class="text-white-50">{{message.iat| date}}</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body " [ngClass]="{'bg-success': message.messageType==1,'bg-danger': message.messageType==0,
+                'bg-primary': message.messageType==2}">
+                {{message.message}}
+            </div>
+        </div>
+    </div>
+</div>
