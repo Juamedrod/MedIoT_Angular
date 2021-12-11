@@ -2,7 +2,7 @@
     <section class="row">
         <div class="col-4">
             <div class="pt-4">
-                <select class="form-select" (change)="onSelectChange1($event)">
+                <select class="form-select" [(ngModel)]="select1" (change)="onSelectChange1($event)">
                     <option value="">Select Device</option>
                     <option [value]="index" *ngFor="let device of devices; let index=index">{{device.nickname}}
                     </option>

@@ -1,0 +1,16 @@
+.topic{
+    background-color: var(--optionalColor3);
+}
+
+h2{
+    color: var(--secondaryColor);
+}
+
+p{
+    transform-origin: center center;
+}
+
+input, label{
+    font-family: var(--ternaryFont);
+    font-weight: 300;
+}

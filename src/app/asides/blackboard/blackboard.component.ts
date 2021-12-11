@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Device } from 'src/app/Interfaces/device.interface';
 import { DisplayConfig, displayType } from 'src/app/Interfaces/DisplayConfig.interface';
+import { msgType } from 'src/app/Interfaces/message.interface';
 import { BlackboardService } from 'src/app/Services/blackboard.service';
 import { DevicesService } from 'src/app/Services/devices.service';
+import { MessagesSystemService } from 'src/app/Services/messages-system.service';
 
 @Component({
   selector: 'blackboard',
@@ -18,7 +20,7 @@ export class BlackboardComponent implements OnInit {
   displayTypes: string[] = [];
   saved: boolean;
 
-  constructor(private devicesService: DevicesService, private blackboardService: BlackboardService) {
+  constructor(private devicesService: DevicesService, private blackboardService: BlackboardService, private messageService: MessagesSystemService) {
     this.setUpDisplayTypes();
     this.saved = false;
     this.varsOfThisDevice = [];
@@ -64,26 +66,32 @@ export class BlackboardComponent implements OnInit {
   * Save the temporary configuration to be final.
   */
   async saveDisplayConfig() {
-    const newDisplayConfig = {
-      dId: this.tempConfig.dId,
-      displayType: parseInt(this.tempConfig._displayType),
-      displaySize: this.tempConfig.displaySize,
-      maxDataRepresentation: this.tempConfig.maxDataRepresentation, //max number of inputs to display
-      refreshInterval: this.tempConfig.refreshInterval,
-      variableId: this.tempConfig.variableId,
-      variableName: this.tempConfig.variableId,
-      color: this.tempConfig._color,//rgba string for color representation
-      backgroundColorRGBA: this.tempConfig._backgroundColorRGBA,
-      fillArea: this.tempConfig.fillArea,
-      chartName: this.tempConfig.chartName,
-      tension: this.tempConfig.tension,
-      borderWidth: this.tempConfig.borderWidth,
-      scaleWithHover: this.tempConfig.scaleWithHover
-    };
+    try {
+      const newDisplayConfig = {
+        dId: this.tempConfig.dId,
+        displayType: parseInt(this.tempConfig._displayType),
+        displaySize: this.tempConfig.displaySize,
+        maxDataRepresentation: this.tempConfig.maxDataRepresentation, //max number of inputs to display
+        refreshInterval: this.tempConfig.refreshInterval,
+        variableId: this.tempConfig.variableId,
+        variableName: this.tempConfig.variableId,
+        color: this.tempConfig._color,//rgba string for color representation
+        backgroundColorRGBA: this.tempConfig._backgroundColorRGBA,
+        fillArea: this.tempConfig.fillArea,
+        chartName: this.tempConfig.chartName,
+        tension: this.tempConfig.tension,
+        borderWidth: this.tempConfig.borderWidth,
+        scaleWithHover: this.tempConfig.scaleWithHover
+      };
 
-    this.arrConfig[this.activeDisplay] = newDisplayConfig;
-    this.saved = true;
-    await this.blackboardService.updateArrConfig(this.arrConfig);
+      this.arrConfig[this.activeDisplay] = newDisplayConfig;
+      this.saved = true;
+      await this.blackboardService.updateArrConfig(this.arrConfig);
+      this.messageService.newMessage({ message: 'Display updated!', messageType: msgType.success });
+    } catch (error) {
+      this.messageService.newMessage({ message: 'Error saving configuration', messageType: msgType.error });
+    }
+
   }
 
   /**
@@ -165,9 +173,9 @@ export class BlackboardComponent implements OnInit {
    *  Remove the display from the list
    */
   async removeDisplay(index: number) {
-    confirm('¿Borrar dispositivo?');
     this.arrConfig.splice(index, 1);
     const response = await this.blackboardService.updateArrConfig(this.arrConfig);
+    this.messageService.newMessage({ message: 'Display removed', messageType: msgType.info });
   }
 
   /**
@@ -181,6 +189,7 @@ export class BlackboardComponent implements OnInit {
     });
   }
 
+  /** A global reset for this variables used as centinels */
   savedCentinelReset() {
     this.saved = false;
     this.varsOfThisDevice = [];

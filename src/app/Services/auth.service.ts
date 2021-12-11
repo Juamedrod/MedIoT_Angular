@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   private authCredentials: string;
-  private user: User;
+  private user: any;
   baseUrl: string;
   jwt: JwtHelperService;
 
@@ -74,7 +74,7 @@ export class AuthService {
 
   /**
  * Retrieve Active User decrypted in token(NO API CALL)
- * @returns  {User} User active in short format
+ * @returns  User active in short format
  */
   getUser() {
     return this.user;

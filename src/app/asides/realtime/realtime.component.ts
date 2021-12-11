@@ -11,6 +11,7 @@ import { RealtimeService } from 'src/app/Services/realtime.service';
 export class RealtimeComponent implements OnInit {
   arrConfig: DisplayConfig[];
   interval: any;
+  /** Parameter to save the front to overAttack the API  */
   DBsaverCooldown: number;
 
   constructor(private blackboardService: BlackboardService, private realtimeService: RealtimeService) {
