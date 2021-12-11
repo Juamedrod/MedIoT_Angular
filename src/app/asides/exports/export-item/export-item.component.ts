@@ -10,10 +10,12 @@ import { LogService } from 'src/app/Services/log.service';
 export class ExportItemComponent implements OnInit {
   selectExport: string;
   downloadURL: string;
+  maxLimitOfData: string;
   @Input() device!: Device;
 
   constructor(private logService: LogService) {
     this.selectExport = '';
+    this.maxLimitOfData = '0';
     this.downloadURL = 'http://192.168.1.39:3000/';
   }
 
@@ -22,7 +24,7 @@ export class ExportItemComponent implements OnInit {
 
   async downloadSCV(dId: string) {
     try {
-      const response = await this.logService.downloadCSV(dId, this.selectExport);
+      const response = await this.logService.downloadCSV(dId, this.maxLimitOfData, this.selectExport);
       window.location.href = `${this.downloadURL}${response.url}`;
       if (response.url) return response.url;
       return '';

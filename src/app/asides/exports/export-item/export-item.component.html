@@ -4,12 +4,18 @@
     <div class="card-body">
         <h5 class="card-title secondaryColor">Device: {{device.nickname}}</h5>
         <hr>
-        <p class="card-text description">{{device.description}}.</p>
+        <p class="card-text description ">{{device.description}}.</p>
         <select class="form-select my-2" [(ngModel)]="selectExport" aria-label="exportSelect">
             <option value=''>Select an export option</option>
             <option value="variables">All variables</option>
             <option [value]="variable" *ngFor="let variable of device.variables">{{variable}}</option>
         </select>
+        <p class="my-0">CSV max rows number: {{maxLimitOfData}}</p>
+        <div class="d-flex align-content-center align-items-center">
+            <span class="p-1 text-white-50">0</span>
+            <input type="range" min="0" max="100" step="1" [(ngModel)]="maxLimitOfData">
+            <span class="p-1 text-white-50"> 100</span>
+        </div>
         <button (click)="downloadSCV(device.dId)" class="btn btn-primary"
             [disabled]="selectExport===''">Download</button>
     </div>

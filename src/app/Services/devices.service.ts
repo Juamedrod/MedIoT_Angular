@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Device } from '../Interfaces/device.interface';
 import { AuthService } from './auth.service';
 
@@ -11,8 +12,7 @@ export class DevicesService {
   baseURL: string;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {
-    this.baseURL = "http://192.168.1.39:3000/api/devices";
-
+    this.baseURL = environment.baseURL + '/api/devices';
   }
 
   /**

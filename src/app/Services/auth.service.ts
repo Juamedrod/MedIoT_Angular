@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../Interfaces/user.interface';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {
     this.jwt = new JwtHelperService();
-    this.baseUrl = 'http://192.168.1.39:3000/api/users';
+    this.baseUrl = environment.baseURL + '/api/users';
     this.authCredentials = '';
     this.user = {
       name: ''

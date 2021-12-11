@@ -15,6 +15,7 @@ import { NoAuthGuard } from './Guards/no-auth.guard';
 import { LogComponent } from './asides/log/log.component';
 import { DetailingComponent } from './asides/detailing/detailing.component';
 import { ExportsComponent } from './asides/exports/exports.component';
+import { DevicesDocComponent } from './asides/devices-doc/devices-doc.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -31,7 +32,8 @@ const routes: Routes = [
       { path: 'history', component: HistoryComponent },
       { path: 'log', component: LogComponent },
       { path: 'detailing', component: DetailingComponent },
-      { path: 'exports', component: ExportsComponent }
+      { path: 'exports', component: ExportsComponent },
+      { path: 'devdoc', component: DevicesDocComponent }
     ]
   },
   { path: '**', redirectTo: '/login' }

@@ -4,9 +4,9 @@ div{
 }
 
 .wrapper{   
-    border:1px solid rgb(25, 135, 84);    
+    border:2px solid var(--optionColor1);    
     border-radius: 10px;    
-    box-shadow: 1px 1px 3px lightgrey;
+    box-shadow: 1px 1px 3px var(--optionColor1);
 }
 
 .ng-touched.ng-invalid:not(form){
@@ -84,8 +84,12 @@ i{
 }
 
 .device{
-    box-shadow: 1px 1px 3px lightgrey;
+    box-shadow: 1px 1px 3px var(--optionColor1);
     min-height: 575px;
+}
+
+.border-success{
+    border-color: var(--optionColor1) !important;
 }
 
 

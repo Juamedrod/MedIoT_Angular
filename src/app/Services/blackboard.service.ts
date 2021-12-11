@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { DisplayConfig } from '../Interfaces/DisplayConfig.interface';
 import { AuthService } from './auth.service';
 
@@ -12,7 +13,7 @@ export class BlackboardService {
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {
     this.arrConfig = [];
-    this.baseURL = "http://192.168.1.39:3000/api/blackboard";
+    this.baseURL = environment.baseURL + '/api/blackboard';
   }
 
   /**

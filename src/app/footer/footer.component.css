@@ -30,6 +30,6 @@ a.secondaryColor:last-child{
 }
 
 a:hover{
-    color: var(--optionColor2);
+    color: white;
     transition: 0.5s;
 }

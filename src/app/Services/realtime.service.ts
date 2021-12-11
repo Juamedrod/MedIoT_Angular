@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Data } from '../Interfaces/data.interface';
 import { Device } from '../Interfaces/device.interface';
 import { AuthService } from './auth.service';
@@ -16,7 +17,7 @@ export class RealtimeService {
   dBCentinelSaverInterval: number;
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private devicesService: DevicesService) {
-    this.baseURL = 'http://192.168.1.39:3000/api/data/';
+    this.baseURL = environment.baseURL + '/api/data/';
     this.latestData = [];
     this.devices = [];
     this.dBCentinelSaverInterval = 1000;

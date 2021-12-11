@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Data } from '../Interfaces/data.interface';
 import { AuthService } from './auth.service';
 
@@ -11,7 +12,7 @@ export class HistoricService {
   baseURL: string;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {
-    this.baseURL = 'http://192.168.1.39:3000/api/data'
+    this.baseURL = environment.baseURL + '/api/data';
   }
 
   getData(dId: string, quantity: string) {

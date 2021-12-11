@@ -1,0 +1,13 @@
+i{
+    font-size: 400%;
+    color: var(--secondaryColor);
+}
+
+article{
+    border: 2px solid var(--optionColor1);
+}
+
+a{
+    text-decoration: none;
+    color: var(--secondaryColor);
+}

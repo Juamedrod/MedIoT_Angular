@@ -24,6 +24,7 @@ import { LogComponent } from './asides/log/log.component';
 import { DetailingComponent } from './asides/detailing/detailing.component';
 import { ExportsComponent } from './asides/exports/exports.component';
 import { ExportItemComponent } from './asides/exports/export-item/export-item.component';
+import { DevicesDocComponent } from './asides/devices-doc/devices-doc.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ExportItemComponent } from './asides/exports/export-item/export-item.co
     LogComponent,
     DetailingComponent,
     ExportsComponent,
-    ExportItemComponent
+    ExportItemComponent,
+    DevicesDocComponent
   ],
   imports: [
     BrowserModule,
