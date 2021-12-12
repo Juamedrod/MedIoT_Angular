@@ -1,17 +1,29 @@
 <div class="container mb-5">
     <h2 class="text-center p-2">User Logs</h2>
     <hr>
-    <div class="row" *ngFor="let log of logs">
+    <div class="row">
         <div class="col-md-4 m-0">
             <p class=" text-muted m-0">Date</p>
-            <p>{{ log.Date }}</p>
         </div>
         <div class="col-md-4 m-0">
             <p class=" text-muted m-0">Action</p>
-            <p>{{ log.action }}</p>
         </div>
         <div class="col-md-4 m-0">
             <p class=" text-muted m-0">Value</p>
+        </div>
+        <hr noshade="noshade">
+    </div>
+    <div class="row" *ngFor="let log of logs">
+        <div class="col-md-4 m-0 ">
+            <p>{{ log.Date }}</p>
+        </div>
+        <div class="col-md-4 m-0 ">
+            <p
+                [ngClass]="{'text-success': log.action=='login','text-info': log.action=='newDevice','text-danger': log.action=='logout' }">
+                {{ log.action }}
+            </p>
+        </div>
+        <div class="col-md-4 m-0 ">
             <p>{{ log.value }}</p>
         </div>
         <hr noshade="noshade">

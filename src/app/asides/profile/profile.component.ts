@@ -3,6 +3,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { User } from 'src/app/Interfaces/user.interface';
 import { AuthService } from 'src/app/Services/auth.service';
+import { LogService } from 'src/app/Services/log.service';
 
 @Component({
   selector: 'profile',
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit {
   eraserRoullete: number;
   formulario: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private logsService: LogService) {
     this.user = this.authService.getUser();
     this.eraserRoullete = 0;
     this.switcher = 0;
@@ -45,9 +46,14 @@ export class ProfileComponent implements OnInit {
   /**
    * Logout function
    */
-  logout() {
-    localStorage.removeItem('authCredentials');
-    this.router.navigate(['/login']);
+  async logout() {
+    try {
+      await this.logsService.saveLog({ key: 'logout', value: 'logout' });
+      localStorage.removeItem('authCredentials');
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.log({ error });
+    }
   }
 
   async deleteAccount() {

@@ -17,6 +17,10 @@ export class LogService {
     return this.httpClient.get<string>(this.baseUrl + 'logs', this.authService.getAuthHeaders()).toPromise();
   }
 
+  public async saveLog({ key, value }: { key: string, value: string }) {
+    return this.httpClient.post(this.baseUrl + 'logs', { key, value }, this.authService.getAuthHeaders()).toPromise();
+  }
+
   public downloadCSV(dId: string, limit: string, variable?: string) {
     return this.httpClient.get<any>(this.baseUrl + 'exports/' + dId + '/' + variable + '?limit=' + limit, this.authService.getAuthHeaders()).toPromise();
   }
