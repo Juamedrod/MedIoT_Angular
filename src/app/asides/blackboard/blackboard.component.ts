@@ -108,7 +108,7 @@ export class BlackboardComponent implements OnInit {
       const device = this.devices.find(device => device.dId == dId);
       this.varsOfThisDevice = device!.variables;
     } catch (error: any) {
-      console.log({ error: error.message });
+      this.messageService.newMessage({ message: 'Select first a device, then a variable!', messageType: msgType.info });
     }
   }
 

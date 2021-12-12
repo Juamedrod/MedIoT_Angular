@@ -61,12 +61,12 @@
                             (ms)</label>
                     </div>
                     <div class=" form-floating mb-3"
-                        *ngIf=" (tempConfig._displayType!=3 && tempConfig._displayType!=4 && tempConfig._displayType!=2)">
+                        *ngIf=" (tempConfig._displayType==0 || tempConfig._displayType==1)">
                         <input type="color" class="form-control " id="color" [(ngModel)]="tempConfig._color">
                         <label for="color" class="text-dark">Chart color</label>
                     </div>
                     <div class=" form-floating mb-3"
-                        *ngIf=" (tempConfig._displayType!=3 && tempConfig._displayType!=4 && tempConfig._displayType!=2)">
+                        *ngIf=" (tempConfig._displayType==0 || tempConfig._displayType==1)">
                         <input type="color" colorformat="rgba" class="form-control " id="backgroundColorRGBA"
                             [(ngModel)]="tempConfig._backgroundColorRGBA">
                         <label for="backgroundColorRGBA" class="text-dark">Chart Background Color</label>
