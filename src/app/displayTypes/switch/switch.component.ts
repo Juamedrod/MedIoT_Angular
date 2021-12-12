@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DisplayConfig, displayType } from 'src/app/Interfaces/DisplayConfig.interface';
+import { msgType } from 'src/app/Interfaces/message.interface';
+import { MessagesSystemService } from 'src/app/Services/messages-system.service';
+import { RealtimeService } from 'src/app/Services/realtime.service';
 
 @Component({
   selector: 'switch',
@@ -8,9 +11,9 @@ import { DisplayConfig, displayType } from 'src/app/Interfaces/DisplayConfig.int
 })
 export class SwitchComponent implements OnInit {
   @Input() displayConfig: DisplayConfig;
-  variableState: boolean;
+  variableState!: boolean;
 
-  constructor() {
+  constructor(private realtimeService: RealtimeService, private messageService: MessagesSystemService) {
     this.displayConfig = {
       displayType: displayType.Switch,
       maxDataRepresentation: 10, //max number of inputs to display
@@ -21,18 +24,25 @@ export class SwitchComponent implements OnInit {
       backgroundColorRGBA: 'rgba(29, 140, 248, 0.1)',
       fillArea: true
     }
-    this.variableState = false;
+    // this.variableState = false;
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.variableState = await this.realtimeService.getBooleanToggleState({ dId: this.displayConfig.dId!, varName: this.displayConfig.variableId });
   }
 
   changeState($event: any) {
-    this.variableState = $event.target.checked
-    const jsonState = {
-      variableId: this.displayConfig.variableId,
-      newState: this.variableState
+    try {
+      this.variableState = $event.target.checked
+      const varState = {
+        dId!: this.displayConfig.dId!,
+        varName!: this.displayConfig.variableId,
+        varValue!: this.variableState,
+      }
+      this.realtimeService.editBooleanToggle(varState);
+      this.messageService.newMessage({ message: 'State changed successfully to: ' + this.variableState, messageType: msgType.success });
+    } catch (error) {
+      this.messageService.newMessage({ message: 'Error,Try again.', messageType: msgType.error });
     }
-    console.log(jsonState);//cambiar por la llamada a la api
   }
 }

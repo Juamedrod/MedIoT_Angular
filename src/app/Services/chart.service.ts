@@ -1,6 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { barChartConfig, lineChartConfig, pieChartConfig } from '../Interfaces/chartDatasets.interfaces';
+import { barChartConfig, lineChartConfig, pieChartConfig, polarAreaConfig } from '../Interfaces/chartDatasets.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class ChartService {
    * @returns The chart itself reference to be set on the canvas.
    */
   lineChart(chart: ElementRef, config: lineChartConfig): Chart {
+    const unit = (config.unit || '')
     return new Chart(chart.nativeElement, {
       type: 'line',
       data: {
@@ -34,6 +35,12 @@ export class ChartService {
           y: {
             beginAtZero: true,
             //max: 100
+            ticks: {
+              // Include a dollar sign in the ticks
+              callback: function (value, index, values) {
+                return value + ' ' + unit;
+              }
+            }
           }
         },
         responsive: true,
@@ -72,7 +79,8 @@ export class ChartService {
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+
           }
         }
       }
@@ -95,6 +103,26 @@ export class ChartService {
           data: [],
           backgroundColor: config.colors,
           hoverOffset: config.scaleWithHover
+        }]
+      },
+    });
+  }
+
+  /**
+  * Function generator of a PolarArea Chart
+  * @param chart Reference to the canvas element in the html.
+  * @param config Its a pieChartConfig interfaced object with all the data needed to configure a PolarArea chart 
+  * @returns The chart itself reference to be set on the canvas.
+  */
+  polarChart(chart: ElementRef, config: polarAreaConfig): Chart {
+    return new Chart(chart.nativeElement, {
+      type: 'polarArea',
+      data: {
+        labels: [],
+        datasets: [{
+          label: config.variableName,
+          data: [],
+          backgroundColor: config.colors,
         }]
       },
     });

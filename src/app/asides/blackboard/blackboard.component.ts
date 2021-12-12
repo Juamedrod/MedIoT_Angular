@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Device } from 'src/app/Interfaces/device.interface';
-import { DisplayConfig, displayType } from 'src/app/Interfaces/DisplayConfig.interface';
+import { DisplayConfig, displayType, UNITS } from 'src/app/Interfaces/DisplayConfig.interface';
 import { msgType } from 'src/app/Interfaces/message.interface';
 import { BlackboardService } from 'src/app/Services/blackboard.service';
 import { DevicesService } from 'src/app/Services/devices.service';
 import { MessagesSystemService } from 'src/app/Services/messages-system.service';
+import { RealtimeService } from 'src/app/Services/realtime.service';
 
 @Component({
   selector: 'blackboard',
@@ -12,6 +13,7 @@ import { MessagesSystemService } from 'src/app/Services/messages-system.service'
   styleUrls: ['./blackboard.component.css']
 })
 export class BlackboardComponent implements OnInit {
+  UNITS: string[] = UNITS;
   arrConfig: DisplayConfig[];//this array saves the user configuration on all displays
   tempConfig: any;//this var saves the actual state in teh modal for the display being edited
   devices: Device[];//the devices this user has registered.
@@ -20,7 +22,7 @@ export class BlackboardComponent implements OnInit {
   displayTypes: string[] = [];
   saved: boolean;
 
-  constructor(private devicesService: DevicesService, private blackboardService: BlackboardService, private messageService: MessagesSystemService) {
+  constructor(private devicesService: DevicesService, private blackboardService: BlackboardService, private messageService: MessagesSystemService, private realtimeService: RealtimeService) {
     this.setUpDisplayTypes();
     this.saved = false;
     this.varsOfThisDevice = [];
@@ -41,7 +43,9 @@ export class BlackboardComponent implements OnInit {
       chartName: '',
       tension: 0,
       borderWidth: 1,
-      scaleWithHover: 1
+      scaleWithHover: 1,
+      colors: ['#9e1f5e', '#42b883', '#FF773D', '#1d8cf8', '#FFFFFF', '#000000', '#1E1E2B', '#0000ff', '#05b31c', '#da81d5', '#e40808'],
+      unit: ''
     };
   }
 
@@ -81,9 +85,12 @@ export class BlackboardComponent implements OnInit {
         chartName: this.tempConfig.chartName,
         tension: this.tempConfig.tension,
         borderWidth: this.tempConfig.borderWidth,
-        scaleWithHover: this.tempConfig.scaleWithHover
+        scaleWithHover: this.tempConfig.scaleWithHover,
+        colors: this.tempConfig.colors,
+        unit: this.tempConfig.unit
       };
 
+      if (newDisplayConfig.displayType == 3) await this.realtimeService.newBooleanToggle({ dId: newDisplayConfig.dId, varName: newDisplayConfig.variableId, varValue: false });
       this.arrConfig[this.activeDisplay] = newDisplayConfig;
       this.saved = true;
       await this.blackboardService.updateArrConfig(this.arrConfig);
@@ -91,7 +98,6 @@ export class BlackboardComponent implements OnInit {
     } catch (error) {
       this.messageService.newMessage({ message: 'Error saving configuration', messageType: msgType.error });
     }
-
   }
 
   /**
@@ -127,6 +133,8 @@ export class BlackboardComponent implements OnInit {
     this.tempConfig.tension = this.arrConfig[index].tension;
     this.tempConfig.borderWidth = this.arrConfig[index].borderWidth;
     this.tempConfig.scaleWithHover = this.arrConfig[index].scaleWithHover;
+    this.tempConfig.colors = this.arrConfig[index].colors;
+    this.tempConfig.unit = this.arrConfig[index].unit;
   }
 
   /**
@@ -143,7 +151,9 @@ export class BlackboardComponent implements OnInit {
       variableName: 'DefaultName',
       color: 'rgb(29, 140, 248)',//rba string for color representation
       backgroundColorRGBA: 'rgba(29, 140, 248, 0.1)',
-      fillArea: true
+      fillArea: true,
+      colors: ['#9e1f5e', '#42b883', '#FF773D', '#1d8cf8', '#FFFFFF', '#000000', '#1E1E2B'],
+      unit: ''
     });
   }
 
@@ -165,7 +175,9 @@ export class BlackboardComponent implements OnInit {
       chartName: '',
       tension: 0,
       borderWidth: 1,
-      scaleWithHover: 1
+      scaleWithHover: 1,
+      colors: ['#9e1f5e', '#42b883', '#FF773D', '#1d8cf8', '#FFFFFF', '#000000', '#1E1E2B'],
+      unit: ''
     };
   }
 

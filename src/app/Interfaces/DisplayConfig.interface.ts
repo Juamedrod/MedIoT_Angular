@@ -1,4 +1,5 @@
-export enum displayType { LineChart, BarChart, PieChart, Switch, BooleanDisplay };
+export enum displayType { LineChart, BarChart, PieChart, Switch, BooleanDisplay, PolarArea };
+export const UNITS: string[] = ['ºC', '%', 'K', 'Kg', 'g', 'mg', 'µg', 'm', 'cm', 'km', 'mol', 'lumen', 's', 'h', 'm', 'V', 'A', 'W', 'Wh', 'R', 'N', 'Pa', 'KPa', 'J', 'm*m', 'm*m*m'];
 
 export interface DisplayConfig {
     _id?: string;
@@ -17,6 +18,7 @@ export interface DisplayConfig {
     chartName?: string;
     fillArea?: boolean;
     tension?: number;
+    unit?: string;
     /**
      * Bar Type Specifics
      */
@@ -26,4 +28,9 @@ export interface DisplayConfig {
      */
     colors?: string[];
     scaleWithHover?: number;
+    /**
+     * PolarArea
+     */
+    //Polar have only colors as attribute, share this setting with Pie
+
 }

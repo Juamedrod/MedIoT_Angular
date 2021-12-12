@@ -68,5 +68,23 @@ export class RealtimeService {
       return error.message;
     }
   };
+
+  /**
+   *  BOOLEAN MANAGMENT
+   * 
+   * ENDPOINT MANAGMENT SERVICE FOR BOOLEAN TOOGLES VARIABLES. SERVE SWITCH COMPONENTS WITH FUNCTIONALITY
+   */
+  newBooleanToggle({ dId, varName, varValue }: { dId: string, varName: string, varValue: boolean }) {
+    return this.httpClient.post<any>(this.baseURL + '/boolean/' + dId + '/' + varName, { varValue }, this.authService.getAuthHeaders()).toPromise();
+  }
+
+  editBooleanToggle({ dId, varName, varValue }: { dId: string, varName: string, varValue: boolean }) {
+    return this.httpClient.put<any>(this.baseURL + '/boolean/' + dId + '/' + varName, { varValue }, this.authService.getAuthHeaders()).toPromise();
+  }
+
+  getBooleanToggleState({ dId, varName }: { dId: string, varName: string }): Promise<boolean> {
+    return this.httpClient.get<boolean>(this.baseURL + '/boolean/' + dId + '/' + varName, this.authService.getAuthHeaders()).toPromise();
+  }
+
 }
 

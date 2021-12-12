@@ -9,6 +9,7 @@ export interface lineChartConfig {
     backgroundColorRGBA: string;
     fillArea: boolean;
     tension: number
+    unit?: string;
 }
 
 /**
@@ -30,4 +31,12 @@ export interface pieChartConfig {
     variableName: string;
     colors: string[];
     scaleWithHover: number
+}
+
+/**
+ * POLAR AREA
+ */
+export interface polarAreaConfig {
+    variableName: string;
+    colors: string[];
 }

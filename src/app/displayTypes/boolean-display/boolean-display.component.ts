@@ -32,7 +32,12 @@ export class BooleanDisplayComponent implements OnInit {
 
   updateState() {
     this.interval = setInterval(() => {
-      this.variableState = this.realtimeService.getVariable(this.displayConfig.dId!, this.displayConfig.variableId);
+      const response = this.realtimeService.getVariable(this.displayConfig.dId!, this.displayConfig.variableId);
+      if (typeof (response) == 'boolean') {
+        this.variableState = response;
+      } else {
+        this.variableState = (response === 'true');
+      }
     }, this.displayConfig.refreshInterval);
   }
 

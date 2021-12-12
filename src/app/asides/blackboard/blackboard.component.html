@@ -54,28 +54,40 @@
                             [(ngModel)]="tempConfig.maxDataRepresentation">
                         <label for="maxDataRepresentation" class="text-dark">Number of values to be displayed</label>
                     </div>
-                    <div class=" form-floating mb-3">
+                    <div class=" form-floating mb-3" *ngIf=" (tempConfig._displayType!=3)">
                         <input type="number" class="form-control " id="refreshInterval"
                             [(ngModel)]="tempConfig.refreshInterval">
                         <label for="refreshInterval" class="text-dark">Interval between pings to the API in milliseconds
                             (ms)</label>
                     </div>
                     <div class=" form-floating mb-3"
-                        *ngIf=" (tempConfig._displayType!=3 && tempConfig._displayType!=4)">
+                        *ngIf=" (tempConfig._displayType!=3 && tempConfig._displayType!=4 && tempConfig._displayType!=2)">
                         <input type="color" class="form-control " id="color" [(ngModel)]="tempConfig._color">
                         <label for="color" class="text-dark">Chart color</label>
                     </div>
                     <div class=" form-floating mb-3"
-                        *ngIf=" (tempConfig._displayType!=3 && tempConfig._displayType!=4)">
+                        *ngIf=" (tempConfig._displayType!=3 && tempConfig._displayType!=4 && tempConfig._displayType!=2)">
                         <input type="color" colorformat="rgba" class="form-control " id="backgroundColorRGBA"
                             [(ngModel)]="tempConfig._backgroundColorRGBA">
                         <label for="backgroundColorRGBA" class="text-dark">Chart Background Color</label>
+                    </div>
+                    <div *ngIf="tempConfig._displayType==3">
+                        <hr class="text-danger ">
+                        <p class="warnings bg-danger">WARNING: ENSURE YOURSELF THAT THIS VARIABLE IS A BOOLEAN. YOU WILL
+                            HAVE ISSUES IF YOU IGNORE
+                            THIS</p>
+                        <hr class="text-danger ">
                     </div>
                     <!-- Line options -->
                     <div class=" form-floating mb-3" *ngIf="tempConfig._displayType==0">
                         <input type="text" class="form-control " id="chartName" [(ngModel)]="tempConfig.chartName">
                         <label for="chartName" class="text-dark">Chart Name</label>
                     </div>
+                    <select class="form-select form-select-lg mb-3" *ngIf="tempConfig._displayType==0"
+                        [(ngModel)]="tempConfig.unit">
+                        <option class="text-dark" value=''>Select the unit of this variable</option>
+                        <option class="text-dark" [value]="unit" *ngFor="let unit of UNITS">{{unit}}</option>
+                    </select>
                     <div class=" mb-3 text-center" *ngIf="tempConfig._displayType==0">
                         <label for="tension" class="text-dark form-label text-center">Curvature between points in the
                             chart, higher numbers end in smoother curves: {{tempConfig.tension}}</label>

@@ -9,7 +9,7 @@ import { ChartService } from '../../Services/chart.service';
   styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit, AfterViewInit {
-  @Input() displayConfig: DisplayConfig;
+  @Input() displayConfig!: DisplayConfig;
   @ViewChild('myChart') myChart!: ElementRef;
   chart: any;
   interval: any;
@@ -17,16 +17,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
   constructor(private chartService: ChartService, private realtimeService: RealtimeService) {
     this.errors = { error: false, msg: '' };
-    this.displayConfig = {
-      displayType: displayType.LineChart,
-      maxDataRepresentation: 10, //max number of inputs to display
-      refreshInterval: 1000,
-      variableId: 'testId',
-      variableName: 'DefaultName',
-      color: 'rgb(29, 140, 248)',//rba string for color representation
-      backgroundColorRGBA: 'rgba(29, 140, 248, 0.1)',
-      fillArea: true
-    }
   }
 
   ngOnInit(): void {
@@ -44,7 +34,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
           backgroundColorRGBA: this.displayConfig.backgroundColorRGBA,
           fillArea: this.displayConfig.fillArea!,
           tension: this.displayConfig.tension!,
-          chartName: this.displayConfig.chartName
+          chartName: this.displayConfig.chartName,
+          unit: this.displayConfig.unit
         })
 
         this.startInterval();
@@ -67,9 +58,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
           colors: this.displayConfig.colors!,
           scaleWithHover: this.displayConfig.scaleWithHover!
         });
-        this.chart.data.labels = ['1', '2', '3'];
-        this.chart.data.datasets[0].data = [50, 25, 25];
-        this.chart.update();
+        this.startInterval();
+        break;
+
+      case (displayType.PolarArea)://PIE
+        this.chart = this.chartService.polarChart(this.myChart, {
+          variableName: this.displayConfig.variableName,
+          colors: this.displayConfig.colors!,
+        });
+        this.startInterval();
         break;
     }
   }
