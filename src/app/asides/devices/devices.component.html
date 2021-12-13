@@ -6,7 +6,7 @@
                 <div class="mb-3">
                     <select class="form-select form-select-lg mb-3" formControlName="deviceType"
                         aria-label=".form-select-lg ">
-                        <option class="text-dark" value=''>Select your device</option>
+                        <option value=''>Select your device</option>
                         <option value="esp32">ESP32-DevKit1</option>
                         <option value="arduino">Arduino Uno</option>
                         <option value="raspberry">Raspberry Pi</option>
@@ -16,7 +16,8 @@
                     </p>
                 </div>
                 <div class=" form-floating mb-3">
-                    <input type="text" class="form-control text-dark" id="floatingInput" formControlName="nickname">
+                    <input type="text" class="form-control text-dark" id="floatingInput" formControlName="nickname"
+                        placeholder="Device Name">
                     <label for="floatingInput">Device Name</label>
                     <p class="error" *ngIf="checkError('nickname', 'required',true)">
                         El campo es requerido
@@ -24,7 +25,7 @@
                 </div>
                 <div class=" form-floating mb-3">
                     <input type="text" class="form-control text-dark" id="floatingInputDescription"
-                        formControlName="description">
+                        formControlName="description" placeholder="Device description">
                     <label for="floatingInputDescription">Device description</label>
                     <p class="error" *ngIf="checkError('description', 'required',true)">
                         El campo es requerido
@@ -32,7 +33,7 @@
                 </div>
                 <div class=" form-floating mb-3">
                     <input type="text" class="form-control text-dark" id="floatingInputDid" formControlName="dId"
-                        (input)="resetButton()">
+                        (input)="resetButton()" placeholder="Device Unique ID">
                     <label for="floatingInputDid">Device Unique ID</label>
                     <p class="error" *ngIf="checkError('dId', 'required',true)">
                         El campo es requerido

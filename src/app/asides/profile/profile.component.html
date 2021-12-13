@@ -5,7 +5,6 @@
     </div>
     <div class="row text-center pt-2">
         <p class="mb-3 fst-italic">Welcome to your profile page, <strong>{{user.name}}</strong>.</p>
-        <p class="mb-3 text-muted">What action do you want to perform?</p>
         <div class="m-1">
             <button class="btn btn-primary pe-md-1 col-12  col-md-3" (click)="setView(0)">VIEW PROFILE</button>
             <button class="btn btn-primary my-2 my-md-0 mx-md-2 ps-md-1 pe-md-1 col-12 col-md-3"
@@ -17,7 +16,7 @@
 
     <div class="content row text-center pt-2 pb-5" *ngIf="switcher==0">
         <div class="col-8 offset-2 border text-center mb-3">
-            <h3 class="p-2">This is your actual User Info</h3>
+            <h3 class="p-2">User Profile</h3>
             <hr>
             <div class=" text-center">
                 <i *ngIf="!user.avatar" class="fas fa-user-ninja fs-1 text-center"></i>
@@ -34,6 +33,11 @@
             <p><span class="text-muted">dni:</span> {{user.dni}}</p>
             <hr>
             <p><span class="text-muted">Profile created at:</span> {{user.createdAt | date}}</p>
+            <hr>
+            <p><i class="fab fa-telegram text-info fs-2 pe-2"></i><span class="text-muted"> Telegram Register
+                    Token:</span>
+                {{user._id}}
+            </p>
         </div>
     </div>
 
