@@ -1,6 +1,6 @@
 <div class="container-fluid wrapper">
-    <div class="row">
-        <div class="col-12 p-5 border text-center" *ngFor="let config of arrConfig; let index=index"
+    <div class="row py-3">
+        <div class="col-12 p-5 customBorder text-center" *ngFor="let config of arrConfig; let index=index"
             [ngClass]="config.displaySize! ">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary p-2 m-2" data-bs-toggle="modal" data-bs-target="#setUpModal"

@@ -36,9 +36,17 @@ export class RealtimeService {
    * be accesible faster.
    */
   async dataSnapshot() {
-    this.latestData = await Promise.all(this.devices.map(async device => {
-      return await this.getLatestSnapshot(device.dId);
-    }));
+    try {
+      const newSnapshot = new Array();
+      for (const device of this.devices) {
+        const response = await this.getLatestSnapshot(device.dId);
+        if (!response) continue;
+        newSnapshot.push(response);
+      }
+      this.latestData = newSnapshot;
+    } catch (error) {
+      console.log('Client Error');
+    }
   }
 
   /**
@@ -85,6 +93,5 @@ export class RealtimeService {
   getBooleanToggleState({ dId, varName }: { dId: string, varName: string }): Promise<boolean> {
     return this.httpClient.get<boolean>(this.baseURL + '/boolean/' + dId + '/' + varName, this.authService.getAuthHeaders()).toPromise();
   }
-
 }
 

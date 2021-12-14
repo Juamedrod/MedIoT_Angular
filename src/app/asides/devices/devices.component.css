@@ -3,12 +3,6 @@ div{
     font-weight: 300;
 }
 
-.wrapper{   
-    border:2px solid var(--optionColor1);    
-    border-radius: 10px;    
-    box-shadow: 1px 1px 3px var(--optionColor1);
-}
-
 .ng-touched.ng-invalid:not(form){
     border: 2px solid tomato;
 }
@@ -82,13 +76,12 @@ i{
     background-position: center center;
 }
 
-.device{
-    box-shadow: 1px 1px 3px var(--optionColor1);
-    min-height: 575px;
-}
-
 .border-success{
-    border-color: var(--optionColor1) !important;
+    border: 3px solid rgb(39, 39, 39) !important;
+    border-radius: 10px !important;    
 }
 
+.btn-danger{
+    background-color: var(--optionColor2);
+}
 

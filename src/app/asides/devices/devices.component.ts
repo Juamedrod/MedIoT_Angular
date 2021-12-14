@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Device } from 'src/app/Interfaces/device.interface';
+import { msgType } from 'src/app/Interfaces/message.interface';
 import { DevicesService } from 'src/app/Services/devices.service';
+import { MessagesSystemService } from 'src/app/Services/messages-system.service';
 
 @Component({
   selector: 'app-devices',
@@ -15,7 +17,7 @@ export class DevicesComponent implements OnInit {
   idAvaliable: boolean;
   clicked: boolean;
 
-  constructor(private devicesService: DevicesService) {
+  constructor(private devicesService: DevicesService, private messageSystem: MessagesSystemService) {
     this.clicked = false;
     this.idAvaliable = false;
     this.variables = [];
@@ -33,23 +35,28 @@ export class DevicesComponent implements OnInit {
   }
 
   async onSubmit() {
-    if (this.formulario.invalid || !this.idAvaliable) return;
-    let variables = [];
-    for (let i = 0; i < this.variables.length; i++) {
-      variables.push(this.formulario.get(`variable${i + 1}`)?.value);
-    };
-    const device: Device = {
-      deviceType: this.formulario.get('deviceType')?.value,
-      description: this.formulario.get('description')?.value,
-      dId: this.formulario.get('dId')?.value,
-      nickname: this.formulario.get('nickname')?.value,
-      variables: variables
+    try {
+      if (this.formulario.invalid || !this.idAvaliable) return;
+      let variables = [];
+      for (let i = 0; i < this.variables.length; i++) {
+        variables.push(this.formulario.get(`variable${i + 1}`)?.value);
+      };
+      const device: Device = {
+        deviceType: this.formulario.get('deviceType')?.value,
+        description: this.formulario.get('description')?.value,
+        dId: this.formulario.get('dId')?.value,
+        nickname: this.formulario.get('nickname')?.value,
+        variables: variables
+      }
+      const newDevice = await this.devicesService.create(device);
+      this.messageSystem.newMessage({ message: 'Device created successfully', messageType: msgType.success });
+      this.formulario.reset();
+      this.clicked = false;
+      this.idAvaliable = false;
+      this.devices = await this.devicesService.getAll();
+    } catch (error) {
+      this.messageSystem.newMessage({ message: 'Device creation aborted', messageType: msgType.error });
     }
-    const newDevice = await this.devicesService.create(device);
-    this.formulario.reset();
-    this.clicked = false;
-    this.idAvaliable = false;
-    this.devices = await this.devicesService.getAll();
   }
 
   addVariableToForm() {

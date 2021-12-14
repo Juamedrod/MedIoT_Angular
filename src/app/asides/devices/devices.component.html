@@ -1,7 +1,8 @@
-<div class="container pb-2">
-    <div class="row text-center p-2">
+<section class="container pb-2">
+    <div class="row text-center p-1">
         <div class="col.12 p-3 wrapper text-center">
-            <h2 class="mt-2">ADD DEVICE</h2>
+            <h2 class="">ADD DEVICE</h2>
+            <hr>
             <form [formGroup]="formulario" novalidate>
                 <div class="mb-3">
                     <select class="form-select form-select-lg mb-3" formControlName="deviceType"
@@ -35,7 +36,7 @@
                     <input type="text" class="form-control text-dark" id="floatingInputDid" formControlName="dId"
                         (input)="resetButton()" placeholder="Device Unique ID">
                     <label for="floatingInputDid">Device Unique ID</label>
-                    <p class="error" *ngIf="checkError('dId', 'required',true)">
+                    <p class="error mb-2" *ngIf="checkError('dId', 'required',true)">
                         El campo es requerido
                     </p>
                     <div class="py-2 d-flex justify-content-center align-items-center">
@@ -71,12 +72,15 @@
             </form>
         </div>
     </div>
-    <h2 class="text-center mt-5">Active Devices</h2>
-    <div class="row pt-3 pb-5">
-        <div class="col-12 col-lg-4 " *ngFor="let device of devices">
-            <div class="p-2  ">
-                <div class="card bg-transparent p-lg-1 device border-success">
-                    <h5 class="card-title text-center">{{device.deviceType}}</h5>
+</section>
+<section class="container p-1 pb-lg-5 mb-3">
+    <h2 class="text-center mt-2">Active Devices</h2>
+    <hr>
+    <div class="row">
+        <div class="col-4" *ngFor="let device of devices">
+            <div class="p-2 h-100 bg-secondary border-success">
+                <div class="card bg-transparent  p-lg-4 border-0 ">
+                    <h5 class="card-title text-center text-uppercase">{{device.deviceType}}</h5>
                     <div class="imgportrait"
                         [ngStyle]="{'backgroundImage': 'url(/assets/images/'+device.deviceType+'.png)'}"></div>
                     <div class="card-body">
@@ -91,4 +95,4 @@
             </div>
         </div>
     </div>
-</div>
+</section>

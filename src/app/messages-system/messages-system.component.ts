@@ -21,7 +21,7 @@ export class MessagesSystemComponent implements OnInit {
       this.arrMessages.push(message);
       setTimeout(() => {
         this.arrMessages.shift();
-      }, 3000);
+      }, 6000);
     }));
   }
 

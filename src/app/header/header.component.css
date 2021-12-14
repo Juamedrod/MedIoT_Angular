@@ -1,7 +1,3 @@
-.container-fluid{
-    background-color: var(--mainColor);    
-}
-
 i{
     cursor: pointer;
     font-size: 140%;

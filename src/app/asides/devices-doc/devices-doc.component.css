@@ -1,5 +1,6 @@
 i{
-    font-size: 400%;
+    padding: 10px 0;
+    font-size: 200%;
     color: var(--secondaryColor);
 }
 
@@ -10,4 +11,11 @@ article{
 a{
     text-decoration: none;
     color: var(--secondaryColor);
+}
+
+p{
+    font-family: var(--mainFont);
+    font-weight: 200;
+    font-size: 115%;
+    line-height: 115%;
 }

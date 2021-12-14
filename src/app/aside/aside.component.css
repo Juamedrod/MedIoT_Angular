@@ -34,3 +34,9 @@ i{
     color: var(--secondaryColor);
     transition: 0.5s;
 }
+
+.myCutomborder{
+    padding:10px;
+    box-shadow: 2px 2px 30px black;
+    border: 4px solid var(--secondaryColor);
+}

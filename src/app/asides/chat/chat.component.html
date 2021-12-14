@@ -1,15 +1,14 @@
 <div class="container-fluid">
     <h2 class="text-center pt-2 ">MedIoT Forum</h2>
-    <hr>
-    <hr>
-    <div class="row py-2" *ngFor="let chat of arrChats; let index=index ; trackBy:trckByIdentify">
+    <hr class="bg-white">
+    <div class=" py-2 customBorder mb-3" *ngFor="let chat of arrChats; let index=index ; trackBy:trckByIdentify">
         <div class="topic d-flex align-items-center justify-content-between">
             <div class="topic d-flex align-items-center justify-content-between rounded-3 p-1 w-100" type="button"
                 data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + index">
                 <!-- [data-bs-target]="'#'+chat._id" -->
                 <div class="d-flex justify-content-start ps-1 m-0">
                     <i class="fas fa-book-open mx-1"></i>
-                    <p class="m-0 ps-2 text-nowrap">{{chat.topic}} <span class="text-black-50">@
+                    <p class="m-0 ps-2 text-nowrap">{{chat.topic}} <span class="orange">@
                             {{chat.userName}}</span>
                     </p>
                 </div>
@@ -20,14 +19,15 @@
                 </div>
             </div>
             <div>
-                <button class="btn btn-close" *ngIf="(userID==chat.userId)" (click)="onDelete(chat._id!)"></button>
+                <button class="btn btn-close btn-close-white" *ngIf="(userID==chat.userId)"
+                    (click)="onDelete(chat._id!)"></button>
             </div>
         </div>
         <div class="collapse mt-1" [id]="'collapse' + index">
             <div class="card card-body text-black ">
                 <div class="row" *ngFor="let message of chat.messages let index=index ; trackBy:trckByIdentify">
                     <div class="col-12 col-md-2">
-                        <p class=" border-3 border-end border-warning  ">@ {{message.userName}}</p>
+                        <p class="border-end">@ {{message.userName}}</p>
                     </div>
                     <div class="col-12 col-md-10">
                         <p>
@@ -60,7 +60,7 @@
                     [(ngModel)]="inputNewTopic">
                 <label for="floatingInput" class="text-black-50">New Topic</label>
             </div>
-            <button class="btn btn-success w-25" (click)="newTopic()">Create Topic</button>
+            <button class="btn customButton w-25" (click)="newTopic()">Create Topic</button>
         </div>
     </div>
 </div>

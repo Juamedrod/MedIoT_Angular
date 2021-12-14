@@ -1,5 +1,13 @@
-.topic{
+.customBorder{
+    border-bottom: 4px solid var(--optionalColor3);
+    box-shadow: 2px 2px 3px black;
+    background-color: var(--optionalColor4);  
+    padding: 10px; 
+}
+
+.customButton{
     background-color: var(--optionalColor3);
+    color: white;
 }
 
 h2{
@@ -13,4 +21,12 @@ p{
 input, label{
     font-family: var(--ternaryFont);
     font-weight: 300;
+}
+
+.orange{
+    color: var(--optionalColor3) ;
+}
+
+.btn-success{
+    background-color: var(--optionalColor3);
 }

@@ -5,14 +5,15 @@
 @import url(https://fonts.googleapis.com/css?family=Fredoka+One:regular);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css);
 
-:root{
-    --mainColor: #1E1E2B;
+:root{    
+    --mainColor: #3d4351;/*el mas claro*/
     --secondaryColor: #42b883;
+    --optionColor5: #2db1d5;
     --ternaryColor: #432534;
-    --optionColor1:#9e1f5e;
-    --optionColor2:#1d8cf8;
+    --optionColor1:#303642;/*oscuro*/
+    --optionColor2:#9e1f5e;
     --optionalColor3: #FF773D;
-    --optionalColor4:#2b2e49;
+    --optionalColor4:#353b47;/*intermedio*/
     --mainFont: Fredoka One;
     --secondaryFont: 'Roboto', cursive;
     --ternaryFont: MuseoModerno;
@@ -23,7 +24,7 @@ html{
     scroll-behavior: smooth;
 }
 
-body,nav{
+body{
     font-family:var(--secondaryFont);
     font-weight: 700;
     background-color: var(--mainColor) ;

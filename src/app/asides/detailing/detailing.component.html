@@ -8,8 +8,8 @@
                     </option>
                 </select>
             </div>
-            <div *ngIf="selectedDevice!=undefined">
-                <h2 class="text-center text-muted text-uppercase p-2">{{selectedDevice.deviceType}}</h2>
+            <div *ngIf="selectedDevice!=undefined" class="mb-5 pb-5">
+                <h2 class="text-center text-uppercase p-2">{{selectedDevice.deviceType}}</h2>
                 <p class="text-center text-success"> Device Unique Identifier(dId): {{selectedDevice.dId}}</p>
                 <div class="imgportrait"
                     [ngStyle]="{'backgroundImage': 'url(/assets/images/'+selectedDevice.deviceType+'.png)'}">
@@ -17,7 +17,8 @@
                 <div class="card-body">
                     <p class="card-text text-center">{{selectedDevice.description}}</p>
                 </div>
-                <p class="text-center text-muted">Variables</p>
+                <p class="text-center text-white fw-bold">Variables</p>
+                <hr>
                 <ul class="list-group-flush bg-transparent list-group-numbered text-white">
                     <li class="list-group-item bg-transparent text-white-50 text-start"
                         *ngFor="let variable of selectedDevice.variables; let index=index">

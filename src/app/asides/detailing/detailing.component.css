@@ -11,9 +11,14 @@ div section div p{
 }
 
 .btn-danger{
-    background-color:var(--optionColor1);
+    background-color:var(--optionColor2);
 }
 
 .btn-primary{
     background-color: var(--secondaryColor);
+}
+
+.text-success{
+    color: var(--secondaryColor) !important;
+    font-weight: bold !important;
 }
