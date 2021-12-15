@@ -11,6 +11,7 @@ export class BooleanDisplayComponent implements OnInit {
   variableState: boolean;
   @Input() displayConfig: DisplayConfig;
   interval: any;
+  icon: string = '';
 
   constructor(private realtimeService: RealtimeService) {
     this.displayConfig = {
@@ -24,10 +25,12 @@ export class BooleanDisplayComponent implements OnInit {
       fillArea: true
     }
     this.variableState = false;
+
   }
 
   ngOnInit(): void {
     this.updateState();
+    this.icon = this.displayConfig.icon!;
   }
 
   updateState() {

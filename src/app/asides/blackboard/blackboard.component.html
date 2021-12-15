@@ -126,6 +126,15 @@
                             <p class="text-dark ps-2">10</p>
                         </div>
                     </div>
+                    <!-- BooleanDisplay options -->
+                    <div class=" mb-3 text-center text-black" *ngIf="tempConfig._displayType==4">
+                        <p>Choose your Icon</p>
+                        <div>
+                            <button class=" btn m-1 p-3" *ngFor="let icon of iconsArray; "
+                                [ngClass]="{'iconSelected' : tempConfig.icon==icon }" (click)="iconSelection(icon)"><i
+                                    class="fas fa-arrow-right fs-1 text-primary" [ngClass]="icon"></i></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <p class="text-success" *ngIf="saved">Settings saved!</p>

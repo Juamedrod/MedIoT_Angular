@@ -1,8 +1,14 @@
 <div class="container h-100 d-flex flex-column justify-content-center">
-    <div class="row text-center pt-2">
-        <i class="far fa-lightbulb fs-1" [ngClass]="{'red':!variableState, 'green': variableState}"></i>
+    <div class="row text-center py-2">
+        <i [ngClass]="{'red':!variableState, 'green': variableState}" [className]="'fs-1 '+icon"></i>
     </div>
     <div class="row">
-        <p class="text-center py-2">{{this.displayConfig.variableName}}</p>
+        <p class="text-center text-primary py-0 m-0">DEVICE : <span class="text-white">{{displayConfig.dId}}</span> </p>
+        <p class="text-center text-primary py-0 m-0"> VARIABLE: <span class=""
+                [ngClass]="{'text-success': variableState, 'text-danger': !variableState}">{{displayConfig.variableName}}</span>
+        </p>
+    </div>
+    <div class="position-relative">
+        <i class="fas fa-database position-absolute top-100 start-100 translate-middle pb-4 text-primary"></i>
     </div>
 </div>

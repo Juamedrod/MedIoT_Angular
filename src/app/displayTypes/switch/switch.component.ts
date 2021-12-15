@@ -24,11 +24,12 @@ export class SwitchComponent implements OnInit {
       backgroundColorRGBA: 'rgba(29, 140, 248, 0.1)',
       fillArea: true
     }
-    // this.variableState = false;
+    this.variableState = false;
   }
 
   async ngOnInit() {
-    this.variableState = await this.realtimeService.getBooleanToggleState({ dId: this.displayConfig.dId!, varName: this.displayConfig.variableId });
+    const response = await this.realtimeService.getBooleanToggleState({ dId: this.displayConfig.dId!, varName: this.displayConfig.variableId });
+    this.variableState = response === true ? true : false;
   }
 
   changeState($event: any) {

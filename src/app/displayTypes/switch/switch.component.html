@@ -1,7 +1,7 @@
 <div class="container h-100 d-flex flex-column justify-content-center">
     <div class="row ">
         <div class="col-2 p-0 py-2">
-            <p class="p-0 text-end">OFF</p>
+            <p class="p-0 text-end" [ngClass]="{'text-danger': !variableState}">OFF</p>
         </div>
         <div class="col-8 text-center p-0">
             <div class=" form-switch d-block">
@@ -10,10 +10,16 @@
             </div>
         </div>
         <div class="col-2 p-0">
-            <p class="text-start p-0 py-2">ON</p>
+            <p class="text-start p-0 py-2" [ngClass]="{'text-success': variableState}">ON</p>
         </div>
     </div>
     <div class="row">
-        <p class="text-center">{{this.displayConfig.variableName}}</p>
+        <p class="text-center text-primary">DEVICE : <span class="text-white">{{displayConfig.dId}}</span> </p>
+        <p class="text-center text-primary"> VARIABLE: <span class="e"
+                [ngClass]="{'text-success': variableState, 'text-danger': !variableState}">{{displayConfig.variableName}}</span>
+        </p>
+    </div>
+    <div class="position-relative">
+        <i class="fas fa-database position-absolute top-100 start-100 translate-middle pb-4 text-primary"></i>
     </div>
 </div>

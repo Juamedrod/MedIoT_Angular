@@ -14,3 +14,11 @@ div{
 .green{
     color: green;
 }
+
+i.fs-1{
+    font-size: 300%;
+}
+
+.text-primary{
+    color:var(--secondaryColor) !important;
+}

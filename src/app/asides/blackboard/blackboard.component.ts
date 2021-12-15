@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Device } from 'src/app/Interfaces/device.interface';
-import { DisplayConfig, displayType, UNITS } from 'src/app/Interfaces/DisplayConfig.interface';
+import { DisplayConfig, displayType, UNITS, ICONS } from 'src/app/Interfaces/DisplayConfig.interface';
 import { msgType } from 'src/app/Interfaces/message.interface';
 import { BlackboardService } from 'src/app/Services/blackboard.service';
 import { DevicesService } from 'src/app/Services/devices.service';
@@ -20,7 +20,9 @@ export class BlackboardComponent implements OnInit {
   activeDisplay: number;//the actual blackboard display that has opened the modal for edition.
   varsOfThisDevice: string[];//variables asociated to the device selected in the modal
   displayTypes: string[] = [];
+  iconsArray: string[] = [];
   saved: boolean;
+  i: number = 0;
 
   constructor(private devicesService: DevicesService, private blackboardService: BlackboardService, private messageService: MessagesSystemService, private realtimeService: RealtimeService) {
     this.setUpDisplayTypes();
@@ -45,8 +47,10 @@ export class BlackboardComponent implements OnInit {
       borderWidth: 1,
       scaleWithHover: 1,
       colors: ['#9e1f5e', '#42b883', '#FF773D', '#1d8cf8', '#FFFFFF', '#000000', '#1E1E2B', '#0000ff', '#05b31c', '#da81d5', '#e40808'],
-      unit: ''
+      unit: '',
+      icon: 'fas fa-question-circle'
     };
+    this.iconsArray = ICONS;
   }
 
   async ngOnInit() {
@@ -87,7 +91,8 @@ export class BlackboardComponent implements OnInit {
         borderWidth: this.tempConfig.borderWidth,
         scaleWithHover: this.tempConfig.scaleWithHover,
         colors: this.tempConfig.colors,
-        unit: this.tempConfig.unit
+        unit: this.tempConfig.unit,
+        icon: this.tempConfig.icon
       };
 
       if (newDisplayConfig.displayType == 3) await this.realtimeService.newBooleanToggle({ dId: newDisplayConfig.dId, varName: newDisplayConfig.variableId, varValue: false });
@@ -135,6 +140,7 @@ export class BlackboardComponent implements OnInit {
     this.tempConfig.scaleWithHover = this.arrConfig[index].scaleWithHover;
     this.tempConfig.colors = this.arrConfig[index].colors;
     this.tempConfig.unit = this.arrConfig[index].unit;
+    this.tempConfig.icon = this.arrConfig[index].icon
   }
 
   /**
@@ -153,7 +159,8 @@ export class BlackboardComponent implements OnInit {
       backgroundColorRGBA: 'rgba(29, 140, 248, 0.1)',
       fillArea: true,
       colors: ['#9e1f5e', '#42b883', '#FF773D', '#1d8cf8', '#FFFFFF', '#000000', '#1E1E2B'],
-      unit: ''
+      unit: '',
+      icon: 'fas fa-question-circle'
     });
   }
 
@@ -177,7 +184,8 @@ export class BlackboardComponent implements OnInit {
       borderWidth: 1,
       scaleWithHover: 1,
       colors: ['#9e1f5e', '#42b883', '#FF773D', '#1d8cf8', '#FFFFFF', '#000000', '#1E1E2B'],
-      unit: ''
+      unit: '',
+      icon: 'fas fa-question-circle'
     };
   }
 
@@ -206,5 +214,10 @@ export class BlackboardComponent implements OnInit {
     this.saved = false;
     this.varsOfThisDevice = [];
     this.resetTemp();
+  }
+
+  /**ICONS carrousel for booleanDisplay types */
+  iconSelection(icon: string) {
+    this.tempConfig.icon = icon;
   }
 }
