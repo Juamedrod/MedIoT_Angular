@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseURL: 'https://mediot.herokuapp.com',
+  baseURL: 'http://192.168.1.39:3000',
 
 };
 
