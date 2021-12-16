@@ -38,5 +38,5 @@ button{
 }
 
 .btn-primary{
-    background-color: var(--optionColor5);
+    background-color: var(--secondaryColor) !important;
 }
